@@ -363,6 +363,7 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
 }
 
@@ -419,4 +420,34 @@ button {
   border: 1px solid #BB945F;
   margin-top: 18px;
   margin-bottom: 20px;
+}
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 9px;
+  flex-wrap: wrap;
+}
+
+.contacts-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.contacts-box > p {
+  margin-bottom: 17px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.padding {
+  padding-bottom: 20px;
+}
+
+.img-map {
+  margin-top: 12px;
 }/*# sourceMappingURL=style.css.map */
