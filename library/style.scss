@@ -1,7 +1,12 @@
+html {
+  background-color: grey;
+}
+
 body {
   margin: 0 auto;
-  width: 1440px;
-  background-color: grey;
+  width: 100%;
+  max-width: 1440px;
+  background-color: rgb(255, 255, 255);
 }
 
 header {
@@ -9,6 +14,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 p {
@@ -33,7 +39,7 @@ ul > li {
 
 li > p {
   color: white;
-  line-height: 50px; /* 250% */
+  line-height: 50px;
   margin: 0;
 }
 
@@ -46,17 +52,30 @@ h1 {
   font-family: 'Forum', cursive;
   font-weight: 400;
   color: white;
-  line-height: 50px; /* 166.667% */
+  line-height: 50px;
   letter-spacing: 0.6px;
   margin: 20px;
   flex-grow: 1;
   font-size: 30px;
 }
 
-.welcome {
-  background-image: url(./assets/image/welcome-bg.jpg);
+h2 {
+  color: #0C0C0E;
+  font-family: Forum;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+//WELCOME
+.welcome-bg {
+  position: relative;
+  max-width: 1440px;
+  background: url(./assets/image/welcome-bg.jpg);
   height: 600px;
-  display: flex;
 }
 
 .welcome-box {
@@ -75,11 +94,83 @@ h1 {
   color: #FFF;
   text-align: center;
   text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-family: Forum;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 50px; /* 125% */
+  line-height: 50px;
   letter-spacing: 3px;
   text-transform: uppercase;
+}
+
+//ABOUT
+.content {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: #FFF;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about > h2 {
+  margin: 20px;
+}
+
+.about > p {
+  line-height: 40px;
+}
+
+.line {
+  border: 1px solid black;
+  width: 50px;
+  margin-bottom: 19px;
+}
+
+.about-images {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.image {
+  width: 450px;
+  height: 560px;
+}
+
+.content:last-child {
+  align-items: center;
+}
+
+.about-radio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radio_container {
+  display: flex;
+  justify-content: space-around;
+  width: 77px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.new-radio {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+.new-radio::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #0C0C0E;
+}
+
+.new-radio:checked::before {
+  background-color: #BB945F;
 }
