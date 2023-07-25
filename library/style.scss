@@ -70,13 +70,6 @@ h2 {
   text-transform: capitalize;
 }
 
-h3 {
-  font-family: Inter;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-}
-
 .text-season {
   font-family: Inter;
   font-size: 20px;
@@ -212,7 +205,8 @@ input[type="radio"] {
   display: flex;
   justify-content: space-between;
   width: 700px;
-  margin-bottom: 21px;
+  margin-bottom: 41px;
+  margin-top: 20px;
 }
 
 .label_style {
@@ -249,7 +243,14 @@ input[type="radio"] {
   background-color: #0C0C0E;
 }
 
-.label_style input[type="radio"]:checked + h3 {
+span {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.label_style input[type="radio"]:checked + span {
   font-weight: 700;
 }
 
