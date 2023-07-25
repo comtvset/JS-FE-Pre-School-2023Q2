@@ -618,3 +618,81 @@ input::placeholder {
   line-height: normal;
   letter-spacing: 1px;
 }
+
+//FOOTER
+.footer {
+  display: flex;
+  flex-direction: column;
+  background-color: #0C0C0E;
+}
+
+.footer > .content {
+  background-color: #0C0C0E;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-box {
+  width: 230px;
+}
+
+.left-box > p {
+  color: #FFF;
+  font-size: 15px;
+  line-height: 20px;
+  margin-top: 19px;
+}
+
+.icons {
+  display: flex;
+  margin-top: 19px;
+  width: 104px;
+  justify-content: space-between;
+}
+
+.right-box {
+  width: 150px;
+  margin-bottom: 13px;
+}
+
+.right-box > p {
+  color: #FFF;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: right;
+}
+
+.right-box > p:first-child {
+  margin-top: 19px;
+}
+
+.right-box > p:last-child {
+  margin-top: -4px;
+}
+
+.line-footer > .line {
+  border: 1px solid #FFF;
+  width: 100%;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom > p {
+  color: #FFF;
+  text-align: center;
+  line-height: 40px;
+  letter-spacing: 2px;
+  margin: 0;
+  margin-top: 17px;
+  margin-bottom: 34px;
+}
+
+.bottom > .margin {
+ margin-left: 57px;
+}
