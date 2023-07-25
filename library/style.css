@@ -70,6 +70,20 @@ h2 {
   text-transform: capitalize;
 }
 
+h3 {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.text-season {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 .welcome-bg {
   position: relative;
   max-width: 1440px;
@@ -232,7 +246,7 @@ input[type=radio] {
   background-color: #0C0C0E;
 }
 
-.label_style input[type=radio]:checked + p {
+.label_style input[type=radio]:checked + h3 {
   font-weight: 700;
 }
 
@@ -321,6 +335,7 @@ input[type=radio] {
 }
 
 .btn-text {
+  font-family: Inter;
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
