@@ -1,5 +1,6 @@
 html {
   background-color: grey;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -41,11 +42,29 @@ li > p {
   color: white;
   line-height: 50px;
   margin: 0;
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
+
+a {
+  text-decoration: none;
+  color: #FFFFFF;
 }
 
 .profile {
   margin-left: 40px;
   margin-right: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.profile #Subtract {
+  transition: 0.5s;
+}
+
+.profile #Subtract:hover {
+  fill: #BB945F;
+  transition: 0.5s;
 }
 
 h1 {
@@ -70,11 +89,35 @@ h2 {
   text-transform: capitalize;
 }
 
+h3 {
+  color: #0C0C0E;
+  font-family: Forum;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
 .text-season {
   font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
+}
+
+.inter {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  transition: 0.5s;
+}
+
+.inter:hover {
+  color: #BB945F;
+  transition: 0.5s;
 }
 
 .welcome-bg {
@@ -96,7 +139,7 @@ h2 {
   background: #0C0C0E;
 }
 
-.welcome-box > h2 {
+.welcome-box > h3 {
   color: #FFF;
   text-align: center;
   text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -172,6 +215,7 @@ input[type=radio] {
   width: 16px;
   height: 16px;
   position: relative;
+  cursor: pointer;
 }
 
 .new-radio::before {
@@ -181,10 +225,12 @@ input[type=radio] {
   height: 16px;
   border-radius: 50%;
   background-color: #0C0C0E;
+  transition: 0.5s;
 }
 
 .new-radio:checked::before {
   background-color: #BB945F;
+  transition: 0.5s;
 }
 
 .favorites-content {
@@ -210,6 +256,7 @@ input[type=radio] {
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 }
 
 .season-radio {
@@ -220,6 +267,7 @@ input[type=radio] {
   border-radius: 50%;
   margin-right: 20px;
   margin-top: 3px;
+  transition: 0.5s;
 }
 
 .season-radio::before {
@@ -245,6 +293,12 @@ span {
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
+  transition: 0.5s;
+}
+
+span:hover {
+  color: #BB945F;
+  transition: 0.5s;
 }
 
 .label_style input[type=radio]:checked + span {
@@ -286,7 +340,7 @@ span {
   margin-bottom: 30px;
 }
 
-.book-content > h2 {
+.book-content > h3 {
   font-size: 20px;
   margin: 0;
 }
@@ -343,6 +397,12 @@ span {
   line-height: normal;
   letter-spacing: 1px;
   margin: 0;
+  transition: 0.5s;
+}
+
+.btn-text:hover {
+  transition: 0.5s;
+  background-color: #BB945F;
 }
 
 button {
@@ -353,11 +413,23 @@ button {
   background-color: transparent;
   margin-top: 15px;
   flex-grow: 1;
+  z-index: 1;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+button:hover {
+  border: 1px solid #BB945F;
 }
 
 .gold-btn {
   border: 1px solid #BB945F;
   color: #BB945F;
+  cursor: auto;
+}
+
+.gold-btn[disabled]:hover {
+  background-color: #FFF;
 }
 
 .book-img {
@@ -368,6 +440,12 @@ button {
   z-index: 1;
   top: 241px;
   position: relative;
+  transition: 0.5s;
+}
+
+.book-img:hover {
+  transition: 0.5s;
+  box-shadow: 0px 0px 67px -12px rgb(12, 12, 14);
 }
 
 .letter-sp {
@@ -388,7 +466,7 @@ button {
   width: 100%;
 }
 
-.menu-1 > h2 {
+.menu-1 > h3 {
   margin: 0;
   color: #BB945F;
 }
@@ -399,7 +477,7 @@ button {
   align-items: flex-end;
 }
 
-.menu-2 > h2 {
+.menu-2 > h3 {
   margin: 0;
   color: #BB945F;
 }
@@ -431,7 +509,7 @@ button {
   margin: 0;
 }
 
-.box-menu_item > h2 {
+.box-menu_item > h3 {
   font-size: 20px;
   margin: 0;
 }
@@ -448,7 +526,7 @@ button {
   justify-content: space-between;
   margin-top: 9px;
   flex-wrap: wrap;
-  margin-bottom: 39px;
+  margin-bottom: 35px;
 }
 
 .contacts-box {
@@ -462,8 +540,17 @@ button {
   text-transform: capitalize;
 }
 
+.contacts-box > p > a {
+  color: #000;
+}
+
 .bold {
   font-weight: 700;
+}
+
+.bold > a {
+  font-weight: 700;
+  color: #000;
 }
 
 .padding {
@@ -518,7 +605,7 @@ button {
   margin-left: 20px;
 }
 
-.field-card > h2 {
+.field-card > h3 {
   margin-left: 20px;
   color: #000;
   font-size: 30px;
@@ -554,6 +641,15 @@ button {
   font-weight: 700;
   line-height: normal;
   letter-spacing: 1px;
+  transition: 0.5s;
+}
+
+button:hover .button-check {
+  color: #BB945F;
+}
+
+button:hover .text-btn {
+  color: #BB945F;
 }
 
 .field-card > input:last-child {
@@ -597,7 +693,7 @@ input::placeholder {
   align-items: flex-end;
 }
 
-.registration > h2 {
+.registration > h3 {
   text-align: center;
   font-size: 30px;
   line-height: normal;
@@ -663,11 +759,30 @@ input::placeholder {
   margin-top: 19px;
 }
 
-.icons {
-  display: flex;
+.left-box > ul {
+  padding: 0;
+}
+
+.icons-box {
   margin-top: 19px;
-  width: 104px;
-  justify-content: space-between;
+  width: 130px;
+}
+
+.icon {
+  margin-right: 16px;
+}
+
+.icon #Vector {
+  transition: 0.5s;
+}
+
+.icon #Vector:hover {
+  fill: #BB945F;
+  transition: 0.5s;
+}
+
+.icons-box > li {
+  margin: 0;
 }
 
 .right-box {
@@ -711,5 +826,5 @@ input::placeholder {
 }
 
 .bottom > .margin {
-  margin-left: 57px;
+  margin-left: 25px;
 }/*# sourceMappingURL=style.css.map */
