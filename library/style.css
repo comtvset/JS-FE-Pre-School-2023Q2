@@ -772,11 +772,29 @@ input::placeholder {
   margin-right: 16px;
 }
 
-.icon #Vector {
+.icon #Vector1 {
   transition: 0.5s;
 }
 
-.icon #Vector:hover {
+.icon #Vector1:hover {
+  fill: #BB945F;
+  transition: 0.5s;
+}
+
+.icon #Vector2 {
+  transition: 0.5s;
+}
+
+.icon #Vector2:hover {
+  fill: #BB945F;
+  transition: 0.5s;
+}
+
+.icon #Vector3 {
+  transition: 0.5s;
+}
+
+.icon #Vector3:hover {
   fill: #BB945F;
   transition: 0.5s;
 }
