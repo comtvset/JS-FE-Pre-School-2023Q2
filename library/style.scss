@@ -7,7 +7,7 @@ body {
   margin: 0 auto;
   width: 100%;
   max-width: 1440px;
-  background-color: rgb(255, 255, 255);
+  background-color: #FFF;
 }
 
 header {
@@ -49,6 +49,7 @@ li > p {
 a {
   text-decoration: none;
   color: #FFFFFF;
+  transition: 0.5s;
 }
 
 .profile {
@@ -203,8 +204,8 @@ h3 {
   display: flex;
   justify-content: space-around;
   width: 77px;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 35px;
+  margin-bottom: 35px;
 }
 
 input[type="radio"] {
@@ -214,8 +215,8 @@ input[type="radio"] {
 }
 
 .new-radio {
-  width: 16px;
-  height: 16px;
+  width: 26px;
+  height: 26px;
   position: relative;
   cursor: pointer;
 }
@@ -228,6 +229,8 @@ input[type="radio"] {
   border-radius: 50%;
   background-color: #0C0C0E;
   transition: 0.5s;
+  top: 5px;
+  left: 5px;
 }
 
 .new-radio:checked::before {
@@ -247,18 +250,25 @@ input[type="radio"] {
   line-height: normal;
 }
 
-.season-container {
+.seasons-container {
   display: flex;
   justify-content: space-between;
   width: 700px;
-  margin-bottom: 41px;
-  margin-top: 20px;
+  margin-bottom: 29px;
+  margin-top: 11px;
 }
 
-.label_style {
+.season:last-child {
+  padding-left: 13px;
+}
+
+.season {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
   cursor: pointer;
 }
 
@@ -268,9 +278,9 @@ input[type="radio"] {
   position: relative;
   border: 2px solid #000;
   border-radius: 50%;
-  margin-right: 20px;
   margin-top: 3px;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .season-radio::before {
@@ -291,20 +301,18 @@ input[type="radio"] {
   background-color: #0C0C0E;
 }
 
-span {
+label {
   font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   transition: 0.5s;
+  padding: 5px 5px 5px 20px;
+  cursor: pointer;
+  width: 68px;
 }
 
-span:hover {
-  color: #BB945F;
-  transition: 0.5s;
-}
-
-.label_style input[type="radio"]:checked + span {
+.season input[type="radio"]:checked + label {
   font-weight: 700;
 }
 
@@ -551,6 +559,11 @@ button:hover {
   color: #000;
 }
 
+.contacts-box > p > a:hover {
+  color: #BB945F;
+  transition: 0.5s;
+}
+
 .bold {
   font-weight: 700;
 }
@@ -558,6 +571,11 @@ button:hover {
 .bold > a {
   font-weight: 700;
   color: #000;
+}
+
+.bold > a:hover {
+  color: #BB945F;
+  transition: 0.5s;
 }
 
 .padding {
@@ -731,6 +749,7 @@ input::placeholder {
   font-weight: 700;
   line-height: normal;
   letter-spacing: 1px;
+  transition: 0.5s;
 }
 
 //FOOTER
@@ -751,13 +770,22 @@ input::placeholder {
 
 .left-box {
   width: 230px;
+  margin-top: 19px;
 }
 
-.left-box > p {
+.left-box a > span {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
   color: #FFF;
   font-size: 15px;
   line-height: 20px;
-  margin-top: 19px;
+  transition: 0.5s;
+}
+
+.left-box a > span:hover {
+  color: #BB945F;
+  transition: 0.5s;
 }
 
 .left-box > ul {
@@ -842,6 +870,11 @@ input::placeholder {
   margin: 0;
   margin-top: 17px;
   margin-bottom: 34px;
+}
+
+.bottom > p > a:hover {
+  color: #BB945F;
+  transition: 0.5s;
 }
 
 .bottom > .margin {
