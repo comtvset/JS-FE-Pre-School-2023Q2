@@ -585,6 +585,12 @@ button:hover {
   }
 }
 
+@media (max-width: 767px) {
+  .seasons-container {
+    width: 100%;
+  }
+}
+
 //COFFEE SHOP
 .letter-sp {
   letter-spacing: 2px;
@@ -735,6 +741,12 @@ button:hover {
   }
   .img-map {
     margin-top: 92px;
+  }
+}
+
+@media (max-width: 767px) {
+  .img-map {
+    width: 100%;
   }
 }
 

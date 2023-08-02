@@ -566,6 +566,11 @@ button:hover {
     margin-left: 9px;
   }
 }
+@media (max-width: 767px) {
+  .seasons-container {
+    width: 100%;
+  }
+}
 .letter-sp {
   letter-spacing: 2px;
 }
@@ -712,6 +717,11 @@ button:hover {
   }
   .img-map {
     margin-top: 92px;
+  }
+}
+@media (max-width: 767px) {
+  .img-map {
+    width: 100%;
   }
 }
 .card-box {
