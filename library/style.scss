@@ -56,7 +56,8 @@ a {
   margin-left: 40px;
   margin-right: 20px;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
+  z-index: 3;
 }
 
 .profile #Subtract {
@@ -121,12 +122,120 @@ h3 {
   transition: 0.5s;
 }
 
+@media (max-width: 1075px) {
+  .profile.active {
+    z-index: 3;
+    margin-right: 7px;
+    transition: 0.3s;
+  }
+  .burger {
+    z-index: 3;
+    position: relative;
+    height: 20px;
+    width: 45px;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-top: -3px;
+    margin-left: 20px;
+  }
+
+  .burger span,
+  .burger::before,
+  .burger::after {
+    left: 0;
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    transition: .3s ease-in-out;
+    background-color: #ffffff;
+  }
+
+  .burger::before,
+  .burger::after {
+    content: "";
+  }
+  .burger::before {
+    top: 9px;
+  }
+  .burger::after {
+    bottom: 0;
+  }
+  .burger.active span {
+    top: 50%;
+    left: 6px;
+    transform: rotate(-45deg) translate(-1px, 50%);
+  }
+  .burger.active::before {
+    display: none;
+  }
+  .burger.active::after {
+    top: 50%;
+    left: 7px;
+    transform: rotate(45deg) translate(1px, 50%);
+  }
+
+  .burger-menu > ul {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    justify-content: space-between;
+  }
+
+  ul > li {
+    margin: 0;
+  }
+  .burger-menu {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 332px;
+    height: 375px;
+    background-color: #000;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    transition: all 0.6s ease 0s;
+    z-index: 3;
+    padding-top: 98px;
+    padding-bottom: 97px;
+    visibility: hidden;
+    transform: translate(100%, 0px);
+  }
+  .burger-menu.active {
+    visibility: visible;
+    transform: translate(0%, 0px);
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -1;
+  }
+  header .active + .overlay {
+    opacity: 1;
+    z-index: 2;
+  }
+  body.lock {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 768px) {
+
+}
+
 //WELCOME
 .welcome-bg {
   position: relative;
   max-width: 1440px;
   background: url(./assets/image/welcome-bg.jpg);
   height: 600px;
+  transition: 0.5s;
 }
 
 .welcome-box {
@@ -148,6 +257,13 @@ h3 {
   line-height: 50px;
   letter-spacing: 3px;
   text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .welcome-bg {
+    background: url(./assets/image/welcome-bg_small.jpg);
+    transition: 0.5s;
+  }
 }
 
 //ABOUT
@@ -190,6 +306,22 @@ h3 {
   height: 560px;
 }
 
+.caret-left {
+ display: none;
+}
+
+.caret-right {
+  display: none;
+}
+
+.visible_1 {
+  display: none;
+}
+
+.visible_2 {
+  display: none;
+}
+
 .content:last-child {
   align-items: center;
 }
@@ -206,6 +338,14 @@ h3 {
   width: 77px;
   margin-top: 35px;
   margin-bottom: 35px;
+}
+
+.enable_1 {
+  display: none;
+}
+
+.enable_2 {
+  display: none;
 }
 
 input[type="radio"] {
@@ -236,6 +376,49 @@ input[type="radio"] {
 .new-radio:checked::before {
   background-color: #BB945F;
   transition: 0.5s;
+}
+
+@media (max-width: 1400px) {
+  .disable_1 {
+    display: none;
+  }
+  .enable_1 {
+    display: block;
+  }
+  .radio_container {
+    width: 100px;
+  }
+}
+
+@media (max-width: 950px) {
+  .about-images {
+    justify-content: center;
+  }
+  .caret-left {
+    display: block;
+    position: relative;
+    top: 20px;
+    left: -58px;
+  }
+  .caret-right {
+    display: block;
+    position: relative;
+    top: 20px;
+    left: 58px;
+  }
+  .disable_2 {
+    display: none;
+  }
+  .enable_2 {
+    display: block;
+  }
+  .radio_container {
+    width: 130px;
+    margin-top: 20px;
+  }
+  .about-title {
+    width: 95%;
+  }
 }
 
 //FAVORITES
@@ -461,6 +644,25 @@ button:hover {
   box-shadow: 0px 0px 67px -12px rgba(12, 12, 14, 1);
 }
 
+@media (max-width: 1220px) {
+  .favorites-items {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .favorites-content {
+    margin-left: 9px;
+  }
+}
+
+@media (max-width: 767px) {
+  .seasons-container {
+    width: 100%;
+  }
+}
+
 //COFFEE SHOP
 .letter-sp {
   letter-spacing: 2px;
@@ -535,6 +737,21 @@ button:hover {
   margin-bottom: 20px;
 }
 
+@media (max-width: 980px) {
+  .menu {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-1 {
+    margin-left: 9px;
+  }
+  .menu-2 {
+    margin-right: 9px;
+  }
+}
+
 //CONTACTS
 .contact {
   display: flex;
@@ -584,6 +801,25 @@ button:hover {
 
 .img-map {
   margin-top: 12px;
+}
+
+@media (max-width: 768px) {
+  .contact {
+    justify-content: space-around;
+  }
+  .contacts-box {
+    margin-left: 9px;
+    flex-grow: 1;
+  }
+  .img-map {
+    margin-top: 92px;
+  }
+}
+
+@media (max-width: 767px) {
+  .img-map {
+    width: 100%;
+  }
 }
 
 //CARDS
@@ -752,6 +988,33 @@ input::placeholder {
   transition: 0.5s;
 }
 
+@media (max-width: 1100px) {
+  .card-box {
+    flex-direction: column;
+    margin-left: -17px;
+  }
+  .registration {
+    align-items: center;
+  }
+  .registration > h3 {
+    margin-left: 20px;
+  }
+  .reg-box {
+    width: 75%;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 41px;
+  }
+  .reg-btn {
+    margin-bottom: 40px;
+    margin-left: 4px;
+    margin-top: 5px;
+  }
+  .your-card > button {
+    margin-bottom: 31px;
+  }
+}
+
 //FOOTER
 .footer {
   display: flex;
@@ -879,4 +1142,24 @@ input::placeholder {
 
 .bottom > .margin {
  margin-left: 25px;
+}
+
+@media (max-width: 768px) {
+  .top {
+    width: 99%;
+  }
+  .left-box {
+    margin-left: 7px;
+  }
+  .line-footer {
+    width: 98%;
+    margin-left: 7px;
+  }
+  .bottom {
+    width: 98%;
+    margin-left: 9px;
+  }
+  .bottom > .margin {
+    margin-left: -34px;
+  }
 }

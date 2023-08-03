@@ -14,8 +14,8 @@
 <body>
     <header>
         <h1>Brooklyn Public Library</h1>
-        <nav>
-            <ul>
+        <nav class="burger-menu">
+            <ul class="burger-items">
                 <li><a href="#about"><span class="inter">About</span></a></li>
                 <li><a href="#favorites"><span class="inter">Favorites</span></a></li>
                 <li><a href="#shop"><span class="inter">Coffee shop</span></a></li>
@@ -27,7 +27,10 @@
             <g id="icon_profile">
             <path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM18.6667 7.77778C18.6667 10.3551 16.5774 12.4444 14.0001 12.4444C11.4227 12.4444 9.33339 10.3551 9.33339 7.77778C9.33339 5.20045 11.4227 3.11111 14.0001 3.11111C16.5774 3.11111 18.6667 5.20045 18.6667 7.77778ZM19.4998 16.2781C20.9584 17.7367 21.7778 19.715 21.7778 21.7778H14L6.22225 21.7778C6.22225 19.715 7.0417 17.7367 8.50031 16.2781C9.95893 14.8194 11.9372 14 14 14C16.0628 14 18.0411 14.8194 19.4998 16.2781Z" fill="white"/>
             </g>
-            </svg>
+        </svg>
+        <div class="burger">
+            <span></span>
+        </div>
     </header>
     <main>
         <section>
@@ -41,18 +44,22 @@
             <div class="section-title">
                 <h2>about</h2>
                 <div class="line"></div>
-                <p>The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside </p>
+                <p class="about-title">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside </p>
             </div>
             <div class="about-images">
+                <img src="./assets/icons/Carret_Left.svg" alt="left" class="caret-left">
                 <img src="./assets/image/image_1.jpg" alt="image_1" class="image">
-                <img src="./assets/image/image_2.jpg" alt="image_2" class="image">
-                <img src="./assets/image/image_3.jpg" alt="image_3" class="image">
+                <img src="./assets/image/image_2.jpg" alt="image_2" class="image disable_1">
+                <img src="./assets/image/image_3.jpg" alt="image_3" class="image disable_2">
+                <img src="./assets/icons/Carret_Right.svg" alt="right" class="caret-right">
             </div>
             <div class="about-radio">
                 <div class="radio_container">
                     <input type="radio" name="select" class="new-radio" checked>
                     <input type="radio" name="select" class="new-radio">
                     <input type="radio" name="select" class="new-radio">
+                    <input type="radio" name="select" class="new-radio enable_1">
+                    <input type="radio" name="select" class="new-radio enable_2">
                 </div>
             </div>
         </section>
@@ -238,7 +245,7 @@
                     <p class="bold">Senior Staff</p>
                     <p>Library Director: <span class="bold"><a href="mailto:AmandaHirst@gmail.com">Amanda Hirst</a></span></p>
                 </div>
-                <a href="https://goo.gl/maps/qGcKmtU4DmtpddZs8" target="_blank"><img src="./assets/image/map.png" alt="map" class="img-map"></a>
+                <a href="https://goo.gl/maps/qGcKmtU4DmtpddZs8" target="_blank" class="map"><img src="./assets/image/map.png" alt="map" class="img-map"></a>
             </div>
         </section>
         <section class="content" id="card">
