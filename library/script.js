@@ -2,14 +2,21 @@ const burger = document.querySelector('.burger');
 const burgerMenu = document.querySelector('.burger-menu');
 const profile = document.querySelector('.profile');
 const header = document.querySelector('header');
-const burgerItems = document.querySelector('.burger-items');
 const overlay = document.createElement('div');
+let burgerItems = document.querySelectorAll('.inter');
 
 overlay.classList.add('overlay');
 header.appendChild(overlay);
 burger.addEventListener('click', activeBurger);
 overlay.addEventListener('click', deactiveBurger);
-burgerItems.addEventListener('click', deactiveBurger);
+
+
+burgerItems = [...burgerItems];
+if (Array.isArray(burgerItems)) {
+    burgerItems.map((item) => item.addEventListener('click', deactiveBurger));
+} else {
+    console.log("error: burgerItems is not an array!");
+}
 
 
 function activeBurger() {
