@@ -56,7 +56,8 @@ a {
   margin-left: 40px;
   margin-right: 20px;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
+  z-index: 3;
 }
 
 .profile #Subtract {
@@ -122,12 +123,13 @@ h3 {
 }
 
 @media (max-width: 1075px) {
-  nav {
-    display: none;
+  .profile.active {
+    z-index: 3;
+    margin-right: 7px;
+    transition: 0.3s;
   }
-
   .burger {
-    z-index: 1;
+    z-index: 3;
     position: relative;
     height: 20px;
     width: 45px;
@@ -160,19 +162,66 @@ h3 {
   }
   .burger.active span {
     top: 50%;
-    left: -10px;
-    transform: rotate(90deg) translate(0px, 50%);
+    left: 6px;
+    transform: rotate(-45deg) translate(-1px, 50%);
   }
   .burger.active::before {
-    top: 50%;
-    transform: rotate(90deg) translate(0px, 50%);
+    display: none;
   }
   .burger.active::after {
     top: 50%;
-    left: 10px;
-    transform: rotate(90deg) translate(0px, 50%);
+    left: 7px;
+    transform: rotate(45deg) translate(1px, 50%);
   }
 
+  .burger-menu > ul {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    justify-content: space-between;
+  }
+
+  ul > li {
+    margin: 0;
+  }
+  .burger-menu {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 332px;
+    height: 375px;
+    background-color: #000;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    transition: all 0.6s ease 0s;
+    z-index: 3;
+    padding-top: 98px;
+    padding-bottom: 97px;
+    visibility: hidden;
+    transform: translate(100%, 0px);
+  }
+  .burger-menu.active {
+    visibility: visible;
+    transform: translate(0%, 0px);
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 2;
+  }
+  header .active + .overlay {
+    opacity: 1;
+  }
+  body.lock {
+    overflow: hidden;
+  }
 }
 
 @media (max-width: 768px) {
@@ -185,6 +234,7 @@ h3 {
   max-width: 1440px;
   background: url(./assets/image/welcome-bg.jpg);
   height: 600px;
+  transition: 0.5s;
 }
 
 .welcome-box {
@@ -211,6 +261,7 @@ h3 {
 @media (max-width: 768px) {
   .welcome-bg {
     background: url(./assets/image/welcome-bg_small.jpg);
+    transition: 0.5s;
   }
 }
 
