@@ -286,12 +286,27 @@ h3 {
 .about-images {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+.slide {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  position: relative;
+  transition: 0.5s;
+}
+
+#overflow {
+  width: 100%;
+  overflow: hidden;
 }
 
 .image {
   width: 450px;
   height: 560px;
+  position: relative;
+  margin-right: 25px;
 }
 
 .caret-left {
@@ -366,7 +381,7 @@ input[type=radio] {
   transition: 0.5s;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1439px) {
   .disable_1 {
     display: none;
   }
@@ -376,22 +391,54 @@ input[type=radio] {
   .radio_container {
     width: 100px;
   }
-}
-@media (max-width: 950px) {
   .about-images {
     justify-content: center;
+  }
+  #overflow {
+    display: flex;
+    justify-content: flex-start;
+    width: 75%;
+  }
+  .image {
+    margin-right: 75px;
+  }
+  .slide {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+}
+@media (max-width: 1340px) {
+  .about-images {
+    justify-content: center;
+  }
+  .slide {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
   }
   .caret-left {
     display: block;
     position: relative;
     top: 20px;
-    left: -58px;
+    left: -3px;
+  }
+  #overflow {
+    width: 75%;
+    overflow: hidden;
+    justify-content: center;
+  }
+  .image {
+    left: 1398px;
+    margin-left: 207px;
   }
   .caret-right {
     display: block;
     position: relative;
     top: 20px;
-    left: 58px;
+    left: 3px;
   }
   .disable_2 {
     display: none;
