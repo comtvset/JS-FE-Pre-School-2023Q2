@@ -57,14 +57,18 @@ const select4 = document.getElementById('select_4');
 const select5 = document.getElementById('select_5');
 const slide = document.querySelector('.slide');
 const check = document.querySelector('.new-radio');
+const left = document.querySelector('.caret-left');
+const right = document.querySelector('.caret-right');
 
 function updateScreen() {
     const screenWidth = window.innerWidth;
     slide.style.left = '0px';
     check.checked = true;
+    let count = 0;
 
     select1.addEventListener('click', () => {
         slide.style.left = '0px';
+        count = 0;
         });
 
     select2.addEventListener('click', () => {
@@ -76,6 +80,7 @@ function updateScreen() {
         }
         if (screenWidth <= 1340) {
             slide.style.left = '-732px';
+            count = 732;
         }
       });
 
@@ -88,6 +93,7 @@ function updateScreen() {
         }
         if (screenWidth <= 1340) {
             slide.style.left = '-1464px';
+            count = 1464;
         }
     });
 
@@ -97,14 +103,71 @@ function updateScreen() {
         }
         if (screenWidth <= 1340) {
             slide.style.left = '-2196px';
+            count = 2196;
         }
     });
 
     select5.addEventListener('click', () => {
         if (screenWidth <= 1340) {
             slide.style.left = '-2928px';
+            count = 2928;
         }
     });
+
+    right.addEventListener('click', () => {
+        console.log(count);
+        if(count < 2928) {
+            for (let i = 0; i < 1; i++) {
+                count += 732;
+                slide.style.left = `-${count}px`;
+                if(count == 732) {
+                    select2.checked = true;
+                }
+                if(count == 1464) {
+                    select3.checked = true;
+                }
+                if(count == 2196) {
+                    select4.checked = true;
+                }
+                if(count == 2928) {
+                    select5.checked = true;
+                }
+            }
+        } else {
+            slide.style.left = `-${count = 0}px`;
+            select1.checked = true;
+        }
+
+    });
+
+    left.addEventListener('click', () => {
+        console.log(count);
+        if(count != 0) {
+            for (let i = 0; i < 1; i++) {
+                count -= 732;
+                slide.style.left = `-${count}px`;
+                if(count == 0) {
+                    select1.checked = true;
+                }
+                if(count == 732) {
+                    select2.checked = true;
+                }
+                if(count == 1464) {
+                    select3.checked = true;
+                }
+                if(count == 2196) {
+                    select4.checked = true;
+                }
+                if(count == 2928) {
+                    select5.checked = true;
+                }
+            }
+        } else {
+            slide.style.left = `-${count = 2928}px`;
+            select5.checked = true;
+        }
+    });
+
   }
   updateScreen();
   window.addEventListener('resize', updateScreen);

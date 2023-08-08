@@ -294,7 +294,7 @@ h3 {
   justify-content: space-between;
   flex-wrap: nowrap;
   position: relative;
-  transition: 0.5s;
+  transition: 0.4s;
 }
 
 #overflow {
