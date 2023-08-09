@@ -1,3 +1,5 @@
+import bookInfo from './books.js';
+
 const burger = document.querySelector('.burger');
 const burgerMenu = document.querySelector('.burger-menu');
 const profile = document.querySelector('.profile');
@@ -42,11 +44,6 @@ function bodyLock() {
 function bodyUnlock() {
     document.body.classList.remove('lock');
 }
-
-// const target = document.querySelector('body');
-// target.addEventListener('click', function(event) {
-//     console.dir(event.target);
-// });
 
 
 //SLIDER
@@ -169,8 +166,66 @@ function updateScreen() {
     });
 
   }
-  updateScreen();
-  window.addEventListener('resize', updateScreen);
+updateScreen();
+window.addEventListener('resize', updateScreen);
+
+//SEASON
+const book = document.querySelectorAll('.book');
+const bookTitle = document.querySelectorAll('.book_title');
+const author = document.querySelectorAll('.author');
+const discription = document.querySelectorAll('.discription');
+
+const winter = document.getElementById('winter');
+const spring = document.getElementById('spring');
+const summer = document.getElementById('summer');
+const autumn = document.getElementById('autumn');
+
+const disabled = document.querySelector('.gold-btn');
+
+let entries = Object.entries(bookInfo);
+
+function seasons (countIMG, count) {
+    for (let i = 0; i < book.length; i++) {
+        book[i].children[1].firstElementChild.attributes[0].value = `./assets/image/book_${countIMG++}.png`
+    }
+    for (let i = 0; i < bookTitle.length; i++) {
+        bookTitle[i].innerHTML = entries[count][1].title;
+        author[i].innerHTML = entries[count][1].author;
+        discription[i].childNodes[1].innerHTML = entries[count][1].discription;
+        count++;
+    }
+}
+
+function addButton() {
+    disabled.setAttribute('disabled', 'disabled');
+    disabled.innerHTML = 'Own';
+    disabled.classList.add('gold-btn');
+}
+
+function removeButton() {
+    disabled.removeAttribute('disabled');
+    disabled.innerHTML = 'Buy';
+    disabled.classList.remove('gold-btn');
+}
+
+winter.addEventListener('click', function() {
+    seasons(1, 0);
+    addButton();
+});
+spring.addEventListener('click', function() {
+    seasons(5, 4);
+    addButton();
+});
+summer.addEventListener('click', function() {
+    seasons(9, 8);
+    removeButton();
+});
+autumn.addEventListener('click', function() {
+    seasons(13, 12);
+    removeButton();
+});
+
+
 
 
 // console.log(

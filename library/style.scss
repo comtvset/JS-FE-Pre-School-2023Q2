@@ -596,6 +596,7 @@ label {
 
 .title-author {
   margin-bottom: 20px;
+  width: 408px;
 }
 
 .title-author > p:first-child {
@@ -618,7 +619,7 @@ label {
 
 .discription {
   flex-grow: 100;
-  padding-right: 12px;
+  padding-right: 49px;
 }
 
 .discription > p:first-child {
@@ -683,6 +684,7 @@ button:hover {
   top: 241px;
   position: relative;
   transition: 0.5s;
+  left: -38px;
 }
 
 .book-img:hover {
