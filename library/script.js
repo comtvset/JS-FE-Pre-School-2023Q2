@@ -112,7 +112,6 @@ function updateScreen() {
     });
 
     right.addEventListener('click', () => {
-        console.log(count);
         if(count < 2928) {
             for (let i = 0; i < 1; i++) {
                 count += 732;
@@ -138,7 +137,6 @@ function updateScreen() {
     });
 
     left.addEventListener('click', () => {
-        console.log(count);
         if(count != 0) {
             for (let i = 0; i < 1; i++) {
                 count -= 732;

@@ -54,7 +54,7 @@ a {
 
 .profile {
   margin-left: 40px;
-  margin-right: 20px;
+  margin-right: 14px;
   cursor: pointer;
   transition: 0.3s;
   z-index: 3;
@@ -125,7 +125,7 @@ h3 {
 @media (max-width: 1075px) {
   .profile.active {
     z-index: 3;
-    margin-right: 7px;
+    margin-right: 14px;
     transition: 0.3s;
   }
   .burger {
@@ -137,6 +137,9 @@ h3 {
     margin-right: 20px;
     margin-top: -3px;
     margin-left: 20px;
+  }
+  .burger {
+    margin-right: 25px;
   }
 
   .burger span,
