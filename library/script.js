@@ -1,5 +1,6 @@
 import bookInfo from './books.js';
 
+//BURGER
 const burger = document.querySelector('.burger');
 const burgerMenu = document.querySelector('.burger-menu');
 const profile = document.querySelector('.profile');
@@ -63,9 +64,28 @@ function updateScreen() {
     check.checked = true;
     let count = 0;
 
+    left.style.opacity = '0.5';
+    right.style.opacity = '1';
+
+    function opacity(count) {
+        if(count == 0) {
+            left.style.opacity = '0.5';
+            right.style.opacity = '1';
+        }
+        if(count > 1) {
+            left.style.opacity = '1';
+            right.style.opacity = '1';
+        }
+        if(count > 2196) {
+            left.style.opacity = '1';
+            right.style.opacity = '0.5';
+        }
+    }
+
     select1.addEventListener('click', () => {
         slide.style.left = '0px';
         count = 0;
+        opacity(count);
         });
 
     select2.addEventListener('click', () => {
@@ -79,6 +99,7 @@ function updateScreen() {
             slide.style.left = '-732px';
             count = 732;
         }
+        opacity(count);
       });
 
     select3.addEventListener('click', () => {
@@ -92,6 +113,7 @@ function updateScreen() {
             slide.style.left = '-1464px';
             count = 1464;
         }
+        opacity(count);
     });
 
     select4.addEventListener('click', () => {
@@ -102,6 +124,7 @@ function updateScreen() {
             slide.style.left = '-2196px';
             count = 2196;
         }
+        opacity(count);
     });
 
     select5.addEventListener('click', () => {
@@ -109,6 +132,7 @@ function updateScreen() {
             slide.style.left = '-2928px';
             count = 2928;
         }
+        opacity(count);
     });
 
     right.addEventListener('click', () => {
@@ -118,6 +142,7 @@ function updateScreen() {
                 slide.style.left = `-${count}px`;
                 if(count == 732) {
                     select2.checked = true;
+                    right.style.opacity = '1';
                 }
                 if(count == 1464) {
                     select3.checked = true;
@@ -129,11 +154,8 @@ function updateScreen() {
                     select5.checked = true;
                 }
             }
-        } else {
-            slide.style.left = `-${count = 0}px`;
-            select1.checked = true;
+            opacity(count);
         }
-
     });
 
     left.addEventListener('click', () => {
@@ -157,9 +179,7 @@ function updateScreen() {
                     select5.checked = true;
                 }
             }
-        } else {
-            slide.style.left = `-${count = 2928}px`;
-            select5.checked = true;
+            opacity(count);
         }
     });
 
@@ -181,70 +201,125 @@ const autumn = document.getElementById('autumn');
 const disabled = document.querySelector('.gold-btn');
 
 let entries = Object.entries(bookInfo);
+const setTime = '200';
 
 function seasons (countIMG, count) {
     for (let i = 0; i < book.length; i++) {
-        book[i].children[1].firstElementChild.attributes[0].value = `./assets/image/book_${countIMG++}.png`
+        book[i].style.opacity = '0';
+        setTimeout(() => {
+            book[i].children[1].firstElementChild.attributes[0].value = `./assets/image/book_${countIMG++}.png`
+        }, setTime);
+        setTimeout(() => {
+            book[i].style.opacity = '1';
+        }, setTime);
     }
-    for (let i = 0; i < bookTitle.length; i++) {
-        bookTitle[i].innerHTML = entries[count][1].title;
-        author[i].innerHTML = entries[count][1].author;
-        discription[i].childNodes[1].innerHTML = entries[count][1].discription;
-        count++;
-    }
+    setTimeout(() => {
+        for (let i = 0; i < bookTitle.length; i++) {
+            bookTitle[i].innerHTML = entries[count][1].title;
+            author[i].innerHTML = entries[count][1].author;
+            discription[i].childNodes[1].innerHTML = entries[count][1].discription;
+            count++;
+        }
+    }, setTime);
 }
 
 function addButton() {
-    disabled.setAttribute('disabled', 'disabled');
-    disabled.innerHTML = 'Own';
-    disabled.classList.add('gold-btn');
+    setTimeout(() => {
+        disabled.setAttribute('disabled', 'disabled');
+        disabled.innerHTML = 'Own';
+        disabled.classList.add('gold-btn');
+    }, setTime);
 }
 
 function removeButton() {
-    disabled.removeAttribute('disabled');
-    disabled.innerHTML = 'Buy';
-    disabled.classList.remove('gold-btn');
+    setTimeout(() => {
+        disabled.removeAttribute('disabled');
+        disabled.innerHTML = 'Buy';
+        disabled.classList.remove('gold-btn');
+    }, setTime);
 }
+removeButton();
 
-winter.addEventListener('click', function() {
+winter.addEventListener('click', function(event) {
+    event.target.setAttribute('disabled', 'disabled');
+    spring.removeAttribute('disabled');
+    summer.removeAttribute('disabled');
+    autumn.removeAttribute('disabled');
     seasons(1, 0);
-    addButton();
+    // addButton();
+    removeButton();
 });
-spring.addEventListener('click', function() {
+spring.addEventListener('click', function(event) {
+    event.target.setAttribute('disabled', 'disabled');
+    winter.removeAttribute('disabled');
+    summer.removeAttribute('disabled');
+    autumn.removeAttribute('disabled');
     seasons(5, 4);
-    addButton();
+    // addButton();
+    removeButton();
 });
-summer.addEventListener('click', function() {
+summer.addEventListener('click', function(event) {
+    event.target.setAttribute('disabled', 'disabled');
+    spring.removeAttribute('disabled');
+    winter.removeAttribute('disabled');
+    autumn.removeAttribute('disabled');
     seasons(9, 8);
     removeButton();
 });
-autumn.addEventListener('click', function() {
+autumn.addEventListener('click', function(event) {
+    event.target.setAttribute('disabled', 'disabled');
+    spring.removeAttribute('disabled');
+    summer.removeAttribute('disabled');
+    winter.removeAttribute('disabled');
     seasons(13, 12);
     removeButton();
 });
+
+const seasonsContainer = document.querySelector('.seasons-container');
+
+window.addEventListener('scroll', () => {
+    const position = seasonsContainer.getBoundingClientRect();
+    changeColor(position)
+  });
+
+  function changeColor(position) {
+    const screenWidth = window.innerWidth;
+    if(screenWidth <= 768) {
+        if (position.top <= 10) {
+            seasonsContainer.style.backgroundColor = 'rgba(187, 148, 95, 0.8)';
+        } else {
+            seasonsContainer.style.backgroundColor = 'transparent';
+        }
+    }
+    if(screenWidth > 768) {
+        seasonsContainer.style.backgroundColor = 'transparent';
+    }
+}
+
 
 
 
 
 console.log(
     `
-    1. Вёрстка соответствует макету. Ширина экрана 768px +26.
-        - блок <header> +2
-        - секция Welcome +2
-        - секция About +2
-        - секция Favorites +4
-        - секция CoffeShop +4
-        - секция Contacts +4
-        - секция LibraryCard +4
-        - блок <footer> + 2
-    2. Ни на одном из разрешений до 640px включительно не появляется горизонтальная полоса прокрутки. Весь контент страницы при этом сохраняется: не обрезается и не удаляется +12
-        - нет полосы прокрутки при ширине страницы от 1440рх до 640рх +4
-        - элементы не выходят за пределы окна браузера при ширине страницы от 1440рх до 640рх +4
-        - элементы не наезжают друг на друга при ширине страницы от 1440рх до 640рх +4
-        - !!!все что будет происходить на ширине свыше 1440px - не оценивается!!!
-    3. На ширине экрана 768рх реализовано адаптивное меню +12 (Рекомендуется сделать появление бургер-меню на ширине 1024px):
-        - при нажатии на бургер-иконку плавно появляется адаптивное меню +4
-        - при нажатии на крестик, или на область вне меню, адаптивное меню плавно скрывается, уезжая за экран +4
-        - ссылки в адаптивном меню работают, обеспечивая плавную прокрутку по якорям при нажатии, а само адаптивное меню при этом плавно скрывается +4
-    `
+     Этап 1: Пользователь не зарегистрирован
+      Ограниченная карусель в блоке About:
+      - Карусель реагирует на нажатие кнопок (кнопки под каруселью и стрелочки слева и справа в мобильной версии) и происходит анимация перелистывания. +15 ✅
+      - На экране шириной 1440px проверяем, чтобы было доступно 2 других скрытых картинки. При каждом нажатии выезжает следующая, и так до границ справа и слева. +2 ✅
+      - Выделенные кнопки под каруселью (имеется ввиду кнопка соответствующая активному слайду и которая имеет коричневый цвет) - неактивные. +2 ✅
+      - Если анимация карусели не успела завершиться, при этом нажата была следующая кнопка, то картинка не должна зависнуть в промежуточном состоянии. +2 🤪
+      - На экране шириной 768px проверяем, чтобы было доступно 2 других скрытых картинки. Для этого меняем разрашение и перезагружаем страницу. Теперь доступных перемещений становится 5. +2 ✅
+      - Неактивными становятся не только выделенные кнопки, но и стрелочки на границах карусели. +2 ✅
+      Слайдер в блоке Favorites
+      - Слайдер реагирует на нажатие кнопок панели навигации и происходит анимация затухания и проявления. +15 ✅
+      - На любой ширине экрана все 4 карточки с книгами одновременно будут плавно затухать, а затем плавно проявляться следующие. +2 ✅
+      - Анимация может быть прервана следующим нажатием на кнопку выбора поры года, но при этом анимация не должна застывать в промежуточном состояни. Должна отрабатывать до конца. +2 🤪
+      - Во время анимаций высота блока Favorites не должна меняться. +2
+      - Панель навигации слайдера сделана по технологии "styicky" для разрешений с одним рядом книг (768px и меньше), т.е. опускается вниз вместе скроллом страницы, прилипая к верхней части экрана, в рамках блока Favorites. +2 ✅
+      До регистрации
+      - Нажатие на кнопку Check the card ни к чему не приведет. ✅
+      До авторизации
+      - Иконка юзера в хедере отображается в виде силуэта. ✅
+      - В блоке Favorites все кнопки должны иметь имя Buy, а не Own. +2 ✅
+     `
 )

@@ -280,6 +280,9 @@ h3 {
   margin: 0 auto;
   background-color: #FFF;
 }
+// .test {
+//   height: 1000px;
+// }
 
 .section-title {
   display: flex;
@@ -477,13 +480,8 @@ input[type="radio"] {
 }
 
 //FAVORITES
-.favorites-content {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
 
-.favorites-content > p {
+.content > p {
   font-weight: 700;
   line-height: normal;
 }
@@ -491,9 +489,9 @@ input[type="radio"] {
 .seasons-container {
   display: flex;
   justify-content: space-between;
-  width: 700px;
+  max-width: 700px;
   margin-bottom: 29px;
-  margin-top: 11px;
+  margin-top: 30px;
 }
 
 .season:last-child {
@@ -571,6 +569,7 @@ label {
   padding: 15px 15px 15px 19px;
   margin-bottom: 10px;
   margin-right: -16px;
+  transition: 0.3s;
 }
 
 .book::before {
@@ -709,14 +708,16 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-  .favorites-content {
+  .content > p{
     margin-left: 9px;
   }
-}
-
-@media (max-width: 767px) {
   .seasons-container {
-    width: 100%;
+    padding-left: 11px;
+    padding-right: 38px;
+    position: sticky;
+    top: 10px;
+    // background-color: rgba(128, 128, 128, 0.8);
+    z-index: 5;
   }
 }
 
