@@ -681,9 +681,6 @@ buttonCheckCard.addEventListener('click', function(event) {
     if(userFullName.value === `${storedUser.name} ${storedUser.lastname}` && cardNumber.value === storedUser.number) {
         libraryCard();
 
-
-
-
         setTimeout(() => {
             removeLibraryCard()
         }, 3000);
@@ -734,6 +731,20 @@ function noAuthorisation() {
     windowUserOneField.classList.remove('one-field-size');
 }
 
+//CLICK BUY ON THE FAVORITES
+let buttonBuy = document.querySelectorAll('.btn-text');
+
+buttonBuy = [...buttonBuy];
+buttonBuy.map((item) => item.addEventListener('click', function() {
+        if(condition == true) {
+            choiceModal(modalLogIn);
+            bodyLock();
+            // console.log('I press when I not register: Buy')
+        } else {
+            // console.log('I press when I not register: Buy')
+        }
+    })
+);
 
 
 // console.log(
@@ -781,5 +792,17 @@ function noAuthorisation() {
 //       При наличии регистрации, но будучи не аторизованным:
 //       - Блок Digital Library Cards. Если введенные имя и номер карты совпадают с данными пользователя, то отображается панель с информацией, вместо кнопки Check the card на 10 секунд. +2 ✅
 //       - Там же после отображения информации, кнопка возвращается в прежнее состояние, а поля в форме сбрасываются. +2 ✅
+
+//      Этап 3: Пользователь на этапе входа в учетную запись после регистрации.
+//       Модальное окно LOGIN
+//       - Дизайн модального окна соответствует макету. +15 (позже появятся пункты оценки по каждому элементу в отдельности). ✅
+//       - При нажатии на кнопку Log In появляется модальное окно LOGIN, где есть поля E-mail or readers card и Password. +2 ✅
+//       - При нажатии кнопки Log In в блоке Digital Library Cards также появляется модальное окно LOGIN. +2 ✅
+//       - Окно центрировано, а область вокруг затемнена (насколько затемнена - не имеет значения). +2 ✅
+//       - При нажатии на крестик в углу окна, или на затемненную область вне этого окна, оно закрывается. +2 ✅
+//       - Для авторизации все поля должны быть не пустыми. +2 ✅
+//       - Пароль должен быть не короче 8 символов. +2 ✅
+//       Блок Favorites
+//       - Если пользователь еще не вошел в учетную запись, то при нажатии на любую кнопку Buy открывается модальное окно LOGIN. +2 ✅
 //      `
 // )
