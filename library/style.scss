@@ -123,6 +123,42 @@ h3 {
   transition: 0.5s;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: -1;
+}
+header .active + .overlay {
+  opacity: 1;
+  z-index: 2;
+}
+main .active + .overlay {
+  opacity: 1;
+  z-index: 2;
+}
+
+body.lock {
+  overflow: hidden;
+}
+
+.user-registratio-title {
+  color: #BB945F;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+}
+
 @media (max-width: 1075px) {
   .profile {
     margin-right: 5px;
@@ -211,24 +247,6 @@ h3 {
   .burger-menu.active {
     visibility: visible;
     transform: translate(0%, 0px);
-  }
-  .overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: -1;
-  }
-  header .active + .overlay {
-    opacity: 1;
-    z-index: 2;
-  }
-  body.lock {
-    overflow: hidden;
   }
 }
 
@@ -448,6 +466,7 @@ input[type="radio"] {
     position: relative;
     top: 20px;
     left: -3px;
+    cursor: pointer;
   }
   #overflow {
     width: 75%;
@@ -463,6 +482,7 @@ input[type="radio"] {
     position: relative;
     top: 20px;
     left: 3px;
+    cursor: pointer;
   }
   .disable_2 {
     display: none;
@@ -1244,18 +1264,139 @@ header .active ~ .overlay-transparent {
   z-index: 1;
 }
 
+//MODAL WINDOWS
+// .modal-windows {
+
+// }
+.cross {
+  position: absolute;
+  top: 10px;
+  left: 218px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.modal-log-in {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  width: 250px;
+  height: 262px;
+  background-color: #FFFFFF;
+  z-index: 4;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+.modal-login-forum {
+  color: #000;
+  text-align: center;
+  font-family: Forum;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.modal-login-inter {
+  color: #000;
+  text-align: start;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  padding: 0;
+  margin-top: 9px;
+  margin-bottom: 9px;
+}
+
+.modal-log {
+  margin-left: 25px;
+}
+
+.modal-log > input[type="email"] {
+  width: 200px;
+  height: 20px;
+  border: 1px solid #BB945F;
+}
+.modal-log > input[type="password"] {
+  width: 200px;
+  height: 20px;
+  border: 1px solid #BB945F;
+}
+.modal-log > input[type="text"] {
+  width: 200px;
+  height: 20px;
+  border: 1px solid #BB945F;
+}
+
+.form > button {
+  flex-grow: 0;
+  margin-top: 10px;
+  margin-left: 25px;
+  margin-bottom: 7px;
+}
+
+.modal-text-question {
+  color: #000;
+  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 25px;
+}
+
+.modal-choice {
+  color: #0C0C0E;
+  text-align: center;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-decoration-line: underline;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.modal-register {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  // height: 262px;
+  max-height: 382px;
+  background-color: #FFFFFF;
+  z-index: 4;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+.details {
+  padding-bottom: 16px;
+}
+
 //STYLE WOTHOUTHTML
 .registration-window {
   position: absolute;
   width: 80px;
   height: 115px;
   background: #FFF;
-  z-index: 5;
   margin-left: -12px;
-  margin-top: 4px;
+  margin-top: 27px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 2;
 }
 
 .one-field {
@@ -1268,6 +1409,11 @@ header .active ~ .overlay-transparent {
   line-height: 20px;
   margin-top: 5px;
 }
+
+.one-field-size {
+  font-size: 12px;
+}
+
 .two-field {
   border: 1px solid #BB945F;
   width: 40px;
@@ -1283,17 +1429,86 @@ header .active ~ .overlay-transparent {
   line-height: 20px;
   margin-top: 14px;
   margin-bottom: -4px;
+  cursor: pointer;
 }
 
 .hidden-start {
   opacity: 0;
+  pointer-events: none;
 }
 .hidden {
   opacity: 0;
   animation: go-out 0.7s ease 0s 1 normal none;
+  pointer-events: none;
 }
 .visible {
   animation: go-in 0.7s ease 0s 1 normal none;
+  z-index: 3;
+}
+
+.disabled-pointer {
+  pointer-events: none;
+}
+.disabled-display {
+  display: none;
+}
+
+.info-user-by-card {
+  height: 50px;
+  width: 169px;
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 70px;
+  // margin-bottom: 31px;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+@media (max-width: 1100px) {
+  .info-user-by-card {
+    margin-bottom: 31px;
+  }
+}
+
+.size-img {
+  width: 20px;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 65px;
+}
+
+.font-style {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  text-transform: capitalize;
+}
+// #icon-1 {
+
+// }
+// #icon-2 {
+
+// }
+// #icon-3 {
+
+// }
+
+#icon-reg-user {
+  background: #ffffff;
+  clip-path: circle(50%);
+  height: 28px;
+  width: 28px;
+  display: flex;
+  margin-bottom: 4px;
 }
 
 @keyframes go-in {
@@ -1301,7 +1516,8 @@ header .active ~ .overlay-transparent {
     opacity: 0;
     transform: scale3d(.1, .1, .1) translate3d(-1000px, 0, 0);
     animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-    background: url(./assets/image/book.jpg);
+    background: url(./assets/image/book_1.png) no-repeat center center;
+    background-size: cover;
   }
   60% {
     opacity: 1;
@@ -1310,7 +1526,8 @@ header .active ~ .overlay-transparent {
   }
   100% {
     // background:#FFF;
-    background: url(./assets/image/book.jpg);
+    background: url(./assets/image/book_1.png) no-repeat center center;
+    background-size: cover;
   }
 }
 
@@ -1318,14 +1535,46 @@ header .active ~ .overlay-transparent {
   40% {
     opacity: 1;
     transform: scale3d(.475, .475, .475) translate3d(42px, 0, 0);
-    background: url(./assets/image/book.jpg);
+    background: url(./assets/image/book_1.png) no-repeat center center;
+    background-size: cover;
   }
   80% {
-    background: url(./assets/image/book.jpg);
+    background: url(./assets/image/book_1.png) nno-repeat center center;
+    background-size: cover;
   }
   100% {
     opacity: 0;
     transform: scale(.1) translate3d(-1000px, 0, 0);
     transform-origin: left center;
+  }
+}
+
+.hidden-modal-start {
+  opacity: 0;
+  pointer-events: none;
+}
+.hidden-modal {
+  animation: fade-out 0.5s both;
+  pointer-events: none;
+}
+.visible-modal {
+  animation: fade-in 1s both;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

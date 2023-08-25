@@ -3,14 +3,19 @@ import bookInfo from './books.js';
 //BURGER
 const burger = document.querySelector('.burger');
 const burgerMenu = document.querySelector('.burger-menu');
-const profile = document.querySelector('.profile');
+let profile = document.querySelectorAll('.profile');
 const header = document.querySelector('header');
 const overlay = document.createElement('div');
 let burgerItems = document.querySelectorAll('.inter');
 
 overlay.classList.add('overlay');
 header.appendChild(overlay);
-burger.addEventListener('click', activeBurger);
+burger.addEventListener('click', function() {
+    // if(!modalLogIn.classList.contains('visible-modal')) {
+    //     activeBurger();
+    // }
+    activeBurger();
+});
 overlay.addEventListener('click', deactiveBurger);
 
 
@@ -21,30 +26,33 @@ if (Array.isArray(burgerItems)) {
     console.log("error: burgerItems is not an array!");
 }
 
+profile = [...profile];
 
 function activeBurger() {
     burger.classList.toggle('active');
     burgerMenu.classList.toggle('active');
-    profile.classList.toggle('active');
+    profile.map((item) => item.classList.toggle('active'));
     header.classList.add('active');
     divUser.classList.remove('active');
     bodyLock();
+    // if (!windowUser.classList.contains('hidden-start') && !windowUser.classList.contains('hidden')) {
+    //     toggleRegWindow();
+    // }
     if (!windowUser.classList.contains('hidden-start') && !windowUser.classList.contains('hidden')) {
-        toggleRegWindow();
+        deactiveRegWindow();
     }
 }
 
 function deactiveBurger() {
     burger.classList.remove('active');
     burgerMenu.classList.remove('active');
-    profile.classList.remove('active');
+    profile.map((item) => item.classList.remove('active'));
     header.classList.remove('active');
-
     bodyUnlock();
 }
 
 function bodyLock() {
-    document.body.classList.toggle('lock');
+    document.body.classList.add('lock');
 }
 
 function bodyUnlock() {
@@ -192,6 +200,13 @@ function updateScreen() {
 updateScreen();
 window.addEventListener('resize', updateScreen);
 
+
+//---
+const iconSvg = document.getElementById('icon_svg');
+const iconRegUser = document.getElementById('icon-reg-user');
+iconRegUser.style.display = 'none';
+//---
+
 //SEASON
 const book = document.querySelectorAll('.book');
 const bookTitle = document.querySelectorAll('.book_title');
@@ -301,7 +316,7 @@ window.addEventListener('scroll', () => {
     }
 }
 
-//REGISTRATION
+//MENU AUTHORISATION
 const windowUser = document.createElement('div');
 const divUser = document.querySelector('.icon-user');
 divUser.appendChild(windowUser);
@@ -309,50 +324,415 @@ windowUser.classList.add('registration-window');
 windowUser.classList.add('hidden-start');
 const windowUserOneField = document.createElement('div');
 const windowUserTwoField = document.createElement('div');
-const windowUserThreeField = document.createElement('div');
-const windowUserFourField = document.createElement('div');
+const login = document.createElement('div');
+const register = document.createElement('div');
 windowUser.appendChild(windowUserOneField);
 windowUser.appendChild(windowUserTwoField);
-windowUser.appendChild(windowUserThreeField);
-windowUser.appendChild(windowUserFourField);
+windowUser.appendChild(login);
+windowUser.appendChild(register);
 windowUserOneField.classList.add('one-field');
 windowUserTwoField.classList.add('two-field');
-windowUserThreeField.classList.add('other-field');
-windowUserFourField.classList.add('other-field');
+login.classList.add('other-field');
+login.setAttribute('id', 'login');
+register.classList.add('other-field');
+register.setAttribute('id', 'register');
 windowUserOneField.innerHTML = 'Profile';
-windowUserThreeField.innerHTML = 'Log In';
-windowUserFourField.innerHTML = 'Register';
+login.innerHTML = 'Log In';
+register.innerHTML = 'Register';
 const overlayTransparent = document.createElement('div');
 overlayTransparent.classList.add('overlay-transparent');
 header.appendChild(overlayTransparent);
 
 
+function activeRegWindow() {
+    windowUser.classList.add('visible');
+    windowUser.classList.remove('hidden-start');
+    windowUser.classList.remove('hidden');
+    divUser.classList.add('active');
 
-const iconPressProfile = document.getElementById('icon_profile');
+    setTimeout(() => {
+        windowUserOneField.classList.remove('disabled-display');
+        windowUserTwoField.classList.remove('disabled-display');
+        login.classList.remove('disabled-display');
+        register.classList.remove('disabled-display');
+    }, 700);
 
-function toggleRegWindow() {
-    if(windowUser.classList.contains('hidden-start')) {
-        windowUser.classList.add('visible');
-        windowUser.classList.remove('hidden-start');
-        divUser.classList.toggle('active');
+    windowUserOneField.classList.add('disabled-display');
+    windowUserTwoField.classList.add('disabled-display');
+    login.classList.add('disabled-display');
+    register.classList.add('disabled-display');
+    profile.map((item) => item.classList.add('disabled-pointer'));
+}
+
+function deactiveRegWindow() {
+    windowUser.classList.add('hidden');
+    windowUser.classList.remove('visible');
+    divUser.classList.remove('active');
+
+    windowUserOneField.classList.add('disabled-display');
+    windowUserTwoField.classList.add('disabled-display');
+    login.classList.add('disabled-display');
+    register.classList.add('disabled-display');
+    profile.map((item) => item.classList.remove('disabled-pointer'));
+}
+
+//CLICK
+profile.map((item) => {
+    item.addEventListener('click', function() {
+        // if(!item.classList.contains('visible-modal')) {
+        //     activeRegWindow();   <---- I will delete it, if I don't remember what it's
+        // }
+        activeRegWindow();
+    });
+});
+
+profile.map((item) => item.addEventListener('click', deactiveBurger));
+
+
+overlayTransparent.addEventListener('click', deactiveRegWindow);
+
+//MODAL WINDOWS
+const modalLogIn = document.querySelector('.modal-log-in');
+const modalRegister = document.querySelector('.modal-register');
+const modalWindows = document.querySelector('.modal-windows');
+modalLogIn.classList.add('hidden-modal-start');
+modalRegister.classList.add('hidden-modal-start');
+const main = document.querySelector('main');
+const overlayModal = document.createElement('div');
+overlayModal.classList.add('overlay');
+main.appendChild(overlayModal);
+let cross = document.querySelectorAll('.cross');
+
+const loginMain = document.getElementById('log-in-main');
+const signUpMain = document.getElementById('sign-up-main');
+const loginModal = document.getElementById('log-in-modal');
+const signUpModal = document.getElementById('sign-up-modal');
+
+let condition = true;
+
+login.addEventListener('click', function() {
+    if(condition == true) {
+        choiceModal(modalLogIn);
+        bodyLock();
+        // console.log('I press: Log In')
+    } else {
+        // console.log('I press: My profile')
     }
-    else if(windowUser.classList.contains('hidden')) {
-        windowUser.classList.add('visible');
-        windowUser.classList.remove('hidden');
-        divUser.classList.toggle('active');
+});
+
+register.addEventListener('click', function() {
+    if(condition == true) {
+        choiceModal(modalRegister);
+        bodyLock();
+        // console.log('I press: Register')
+    } else {
+        // console.log('I press: Log Out')
+        noAuthorisation();
+        deactiveRegWindow();
     }
-    else if(windowUser.classList.contains('visible')) {
-        windowUser.classList.add('hidden');
-        windowUser.classList.remove('visible');
-        divUser.classList.remove('active');
+});
+
+
+loginMain.addEventListener('click', function() {
+    if(condition == true) {
+        choiceModal(modalLogIn);
+        bodyLock();
+    } else {
+        // console.log('I press: Profile')
+    }
+
+});
+signUpMain.addEventListener('click', function() {
+    choiceModal(modalRegister);
+    bodyLock();
+});
+
+loginModal.addEventListener('click', function() {
+    choiceModal(modalLogIn, off);
+    bodyLock();
+});
+signUpModal.addEventListener('click', function() {
+    choiceModal(modalRegister, off);
+    bodyLock();
+});
+
+
+
+let off = 0;
+
+function choiceModal(el, off) {
+    el.classList.add('visible-modal');
+    overlayModal.style.zIndex = '3';
+    toggleModal(el);
+
+
+    if(off == 0) {
+        if(el === modalLogIn) {
+            overlayModal.style.zIndex = '3';
+            toggleModal(modalRegister);
+            modalWindows.classList.add('active');
+        }
+        if(el === modalRegister) {
+            overlayModal.style.zIndex = '3';
+            toggleModal(modalLogIn);
+            modalWindows.classList.add('active');
+        }
+    }
+
+    function toggleModal(event) {
+        if(event.classList.contains('hidden-modal-start')) {
+            event.classList.remove('hidden-modal-start');
+            event.classList.add('visible-modal');
+            modalWindows.classList.add('active');
+            windowUser.classList.remove('active');
+            deactiveRegWindow();
+        }
+        else if(event.classList.contains('hidden-modal')) {
+            openModal(event)
+        }
+        else if(event.classList.contains('visible-modal')) {
+            closeModal(event)
+        }
+
+        function openModal(event) {
+            event.classList.remove('hidden-modal');
+            event.classList.add('visible-modal');
+            modalWindows.classList.add('active');
+            windowUser.classList.remove('active');
+            deactiveRegWindow();
+        }
+
+        function closeModal() {
+            event.classList.add('hidden-modal');
+            event.classList.remove('visible-modal');
+            modalWindows.classList.remove('active');
+            windowUser.classList.remove('active');
+            deactiveRegWindow();
+            resetForm();
+        }
     }
 }
 
-iconPressProfile.addEventListener('click', toggleRegWindow);
-iconPressProfile.addEventListener('click', deactiveBurger);
-overlayTransparent.addEventListener('click', toggleRegWindow);
-// !!!СОЗДАТЬ overlay-transparent, ЧТОБ АКТИВИРОВАТЬ ЕГО ПРИ ОТКРЫТИИ МЕНЮ
-// !!!А ПОТОМ СКРЫВАТЬ ПРИ КЛИКЕ НА ЛЮБОЕ МЕСТО
+overlayModal.addEventListener('click', function() {
+    if(modalLogIn.classList.contains('visible-modal')) {
+        choiceModal(modalLogIn);
+        overlayModal.style.zIndex = '-1';
+        bodyUnlock();
+    }
+    if(modalRegister.classList.contains('visible-modal')) {
+        choiceModal(modalRegister);
+        overlayModal.style.zIndex = '-1';
+        bodyUnlock();
+    }
+});
+
+cross = [...cross];
+if (Array.isArray(cross)) {
+    cross.map((item) => item.addEventListener('click', function() {
+        if(modalLogIn.classList.contains('visible-modal')) {
+            choiceModal(modalLogIn);
+            overlayModal.style.zIndex = '-1';
+            bodyUnlock();
+        }
+        if(modalRegister.classList.contains('visible-modal')) {
+            choiceModal(modalRegister);
+            overlayModal.style.zIndex = '-1';
+            bodyUnlock();
+        }
+    }));
+}
+
+
+//RESET FORM AFTER CLOSE
+let form = document.querySelectorAll('.form');
+function resetForm() {
+    form = [...form];
+    form.map((item) => item.reset());
+}
+
+
+//SUBMIT TO LOCALSTAGE
+let user = {};
+const formReg = document.getElementById('form-reg');
+
+
+formReg.addEventListener("submit", function(event) {
+    const maxNumber = 99999999;
+    let randomNumber = `F${Math.floor(Math.random() * maxNumber)}`;
+
+
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const email = document.getElementById('email-reg').value;
+    const password = document.getElementById('password-reg').value;
+    event.preventDefault();
+    user.name = firstName;
+    user.lastname = lastName;
+    user.email = email;
+    user.password = password;
+    user.number = randomNumber;
+
+    localStorage.setItem('user', JSON.stringify(user));
+
+    alert('registration successful');
+
+    if(modalRegister.classList.contains('visible-modal')) {
+        // choiceModal(modalRegister);
+        modalRegister.classList.add('hidden-modal');
+        modalRegister.classList.remove('visible-modal');
+        modalWindows.classList.remove('active');
+        windowUser.classList.remove('active');
+        overlayModal.style.zIndex = '-1';
+        bodyUnlock();
+    }
+    authorisation();
+})
+
+//LIBRARY CARD
+const userFullName = document.getElementById('user-full-name');
+const cardNumber = document.getElementById('card-number');
+const buttonCheckCard = document.getElementById('check-card');
+const yourCard = document.querySelector('.your-card');
+const infoUserByCard = document.createElement('div');
+yourCard.appendChild(infoUserByCard);
+infoUserByCard.classList.add('info-user-by-card');
+infoUserByCard.style.display = 'none';
+
+for (let i = 0; i < 3; i++) {
+    const iconContainer = document.createElement('div');
+    iconContainer.classList.add('icon-container');
+    infoUserByCard.appendChild(iconContainer);
+    const titleInfo = document.createElement('span');
+    iconContainer.appendChild(titleInfo);
+    titleInfo.classList.add('font-style');
+    titleInfo.setAttribute('id', `title-info-${i+1}`)
+    const img = document.createElement('img');
+    iconContainer.appendChild(img);
+    img.setAttribute('src', `./assets/icons/icon${i+1}.svg`);
+    img.setAttribute('alt', `icon-${i+1}`);
+    img.classList.add('size-img');
+    const numInfo = document.createElement('span');
+    iconContainer.appendChild(numInfo);
+    numInfo.classList.add('font-style');
+    numInfo.setAttribute('id', `num-info-${i+1}`);
+}
+
+const titleInfo1 = document.getElementById('title-info-1');
+const titleInfo2 = document.getElementById('title-info-2');
+const titleInfo3 = document.getElementById('title-info-3');
+
+const numInfo1 = document.getElementById('num-info-1');
+const numInfo2 = document.getElementById('num-info-2');
+const numInfo3 = document.getElementById('num-info-3');
+
+titleInfo1.innerText = 'Visits';
+titleInfo2.innerText = 'Bonuses';
+titleInfo3.innerText = 'Books';
+
+numInfo1.innerText = '23';
+numInfo2.innerText = '1240';
+numInfo3.innerText = '2';
+
+function libraryCard() {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    userFullName.value = `${storedUser.name} ${storedUser.lastname}`;
+    cardNumber.value = storedUser.number;
+
+    buttonCheckCard.style.display = 'none';
+    infoUserByCard.style.display = 'flex';
+}
+// libraryCard(); <--- PUSH IT FOR DEVELOP CARD
+
+function removeLibraryCard() {
+    userFullName.value = '';
+    cardNumber.value = '';
+    infoUserByCard.style.display = 'none';
+    buttonCheckCard.style.display = 'block';
+}
+
+const titleFieldCard = document.getElementById('title-field-card');
+const cardField1 = document.getElementById('card-field-1');
+const cardField2 = document.querySelector('.reg-box');
+
+function visit() {
+    titleFieldCard.innerHTML = 'Your Library card';
+    cardField1.innerHTML = 'Visit your profile';
+    cardField2.innerHTML = 'With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.';
+    signUpMain.style.opacity = '0';
+    signUpMain.style.pointerEvents = 'none';
+    loginMain.innerHTML = 'Profile';
+    loginMain.classList.add('text-btn');
+}
+
+function novisit() {
+    titleFieldCard.innerHTML = 'Find your Library card';
+    cardField1.innerHTML = 'Get a reader card';
+    cardField2.innerHTML = 'You will be able to see a reader card after logging into account or you can register a new account';
+    signUpMain.style.opacity = '1';
+    signUpMain.style.pointerEvents = 'auto';
+    loginMain.innerHTML = 'Log in';
+    // loginMain.classList.remove('text-btn');
+}
+
+buttonCheckCard.addEventListener('click', function(event) {
+    event.preventDefault();
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+
+    if(userFullName.value === `${storedUser.name} ${storedUser.lastname}` && cardNumber.value === storedUser.number) {
+        libraryCard();
+
+
+
+
+        setTimeout(() => {
+            removeLibraryCard()
+        }, 3000);
+    } else {console.log('WRONG!')}
+
+})
+
+//ICON CHANGE FOR AUTHORISATION
+function iconChange() {
+    iconSvg.style.display = 'none';
+    iconRegUser.style.display = 'block';
+
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+
+    const title = `${storedUser.name} ${storedUser.lastname}`;
+    iconRegUser.setAttribute('title', title);
+
+    const userRegistratioTitle = document.querySelector('.user-registratio-title');
+    userRegistratioTitle.innerHTML = (storedUser.name.split('').slice(0, 1)+storedUser.lastname.split('').slice(0, 1)).toUpperCase();
+
+}
+
+//CHANGE MENU AUTHORISATION
+function authorisation() {
+    login.innerHTML = 'My profile';
+    register.innerHTML = 'Log Out';
+    condition = false;
+    iconChange();
+    libraryCard();
+    visit();
+
+
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    windowUserOneField.innerHTML = storedUser.number;
+    windowUserOneField.classList.add('one-field-size');
+}
+
+function noAuthorisation() {
+    login.innerHTML = 'Log In';
+    register.innerHTML = 'Register';
+    iconSvg.style.display = 'block';
+    iconRegUser.style.display = 'none';
+    condition = true;
+    removeLibraryCard();
+    novisit();
+
+    windowUserOneField.innerHTML = 'Profile';
+    windowUserOneField.classList.remove('one-field-size');
+}
 
 
 
@@ -383,23 +763,23 @@ overlayTransparent.addEventListener('click', toggleRegWindow);
 //       - Нажатие на иконку пользователя в хедере открывает меню, которое должно оказаться под иконкой таким образом, что правый верхний угол меню находится в той же точке, что и нижний правый угол контейнера с иконкой в хедере. Меню под иконкой. +2 ✅
 //       - На разрешении 768px при открытом бургер-меню, оно закрвывается и открывается меню авторизации. +2 ✅
 //       - То же верно и в обратную сторону, кнопка бургер-меню должна быть доступна при открытом меню авторизации. +2 ✅
-//       - Нажатие на любую область или элмемент вне меню приводят к закрытию меню авторизации. +2 ✅
+//       - Нажатие на любую область или элмемент вне меню приводят к закрытию меню авторизации. +2 ❌
 //       Модальное окно REGISTER:
-//       - Дизайн модального окна соотвествует макету. +15 (позже появятся пункты оценки по каждому элементу в отдельности). ❌
-//       - При нажатии на кнопку Register в открытом меню авторизации появляется модальное окно REGISTER, где есть поля First name, Last name, E-mail и Password. +2 ❌
-//       - При нажатии кнопки Sign Up в блоке Digital Library Cards также появляется модальное окно REGISTER. +2 ❌
-//       - Окно центрировано, а область вокруг затемнена (насколько затемнена - не имеет значения). +2 ❌
-//       - При нажатии на крестик в углу окна, или на затемненную область вне этого окна, оно закрывается. +2 ❌
-//       - В данном случае, ограничения по полям - все поля должны быть не пустыми. +2 ❌
-//       - Пароль должен быть не короче 8 символов. +2 ❌
-//       - В поле E-mail должна быть валидация типа email. +2 ❌
+//       - Дизайн модального окна соотвествует макету. +15 (позже появятся пункты оценки по каждому элементу в отдельности). ✅
+//       - При нажатии на кнопку Register в открытом меню авторизации появляется модальное окно REGISTER, где есть поля First name, Last name, E-mail и Password. +2 ✅
+//       - При нажатии кнопки Sign Up в блоке Digital Library Cards также появляется модальное окно REGISTER. +2 ✅
+//       - Окно центрировано, а область вокруг затемнена (насколько затемнена - не имеет значения). +2 ✅
+//       - При нажатии на крестик в углу окна, или на затемненную область вне этого окна, оно закрывается. +2 ✅
+//       - В данном случае, ограничения по полям - все поля должны быть не пустыми. +2 ✅
+//       - Пароль должен быть не короче 8 символов. +2 ✅
+//       - В поле E-mail должна быть валидация типа email. +2 ✅
 //       Окончание регистрации:
-//       - Данные созраняются в хранилище localStorage, в том числе и пароль, хотя в реальной жизни так делать нельзя. +2 ❌
-//       - Иконка пользователя меняется на заглавные буквы имени. +2 ❌
-//       - Отображение страницы приходит в состояение после авторизации (этап 4). +2 ❌
-//       - Будет сгенерирован девятизначный Card Number случайным образом в формате 16-ричного числа. +2 ❌
+//       - Данные созраняются в хранилище localStorage, в том числе и пароль, хотя в реальной жизни так делать нельзя. +2 ✅
+//       - Иконка пользователя меняется на заглавные буквы имени. +2 ✅
+//       - Отображение страницы приходит в состояение после авторизации (этап 4). +2 ✅
+//       - Будет сгенерирован девятизначный Card Number случайным образом в формате 16-ричного числа. +2 ✅
 //       При наличии регистрации, но будучи не аторизованным:
-//       - Блок Digital Library Cards. Если введенные имя и номер карты совпадают с данными пользователя, то отображается панель с информацией, вместо кнопки Check the card на 10 секунд. +2 ❌
-//       - Там же после отображения информации, кнопка возвращается в прежнее состояние, а поля в форме сбрасываются. +2 ❌
+//       - Блок Digital Library Cards. Если введенные имя и номер карты совпадают с данными пользователя, то отображается панель с информацией, вместо кнопки Check the card на 10 секунд. +2 ✅
+//       - Там же после отображения информации, кнопка возвращается в прежнее состояние, а поля в форме сбрасываются. +2 ✅
 //      `
 // )
