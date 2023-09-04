@@ -1,6 +1,6 @@
 import bookInfo from './books.js';
 
-// document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     let userLogin = localStorage.getItem('login');
 
 //BURGER
@@ -1000,9 +1000,18 @@ formByCard.addEventListener("submit", function() {
     localStorage.setItem('bycard', JSON.stringify(true));
 });
 
+//copy
+const copy = document.querySelector('.copy');
+
+copy.addEventListener('click', function(){
+    const clipboard = navigator.clipboard;
+    const numberCopy = cardNumber.value;
+    clipboard.writeText(numberCopy)
+})
 
 
-// });
+
+});
 
 
 
@@ -1079,7 +1088,7 @@ formByCard.addEventListener("submit", function() {
 //       - В случае если имя и фамилия слешиком длинные и не влазят в блок то должен произойти перенос фамилии на следующую строку. ✅
 //       - Счетчик для Visits отображает, сколько раз пользователь проходил процесс авторизации, включая самый первый - регистрацию. +2 ✅
 //       - Счетчик для Books отображает, сколько у пользователя книг находятся в состоянии Own. Значение варьируется 0-16. +2 ✅
-//       - Рядом с Card Number есть кнопка, нажатие на которую копирует код карты клиента в буфер обмена. +2 ❌
+//       - Рядом с Card Number есть кнопка, нажатие на которую копирует код карты клиента в буфер обмена. +2 ✅
 //       - Окно центрировано, а область вокруг затемнена (насколько затемнена - не имеет значения). +2 ✅
 //       - При нажатии на крестик в углу окна, или на затемненную область вне этого окна, оно закрывается. +2 ✅
 //      Блок Favorites:
