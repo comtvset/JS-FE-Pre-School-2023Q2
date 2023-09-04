@@ -1,5 +1,8 @@
 import bookInfo from './books.js';
 
+// document.addEventListener('DOMContentLoaded', function() {
+    let userLogin = localStorage.getItem('login');
+
 //BURGER
 const burger = document.querySelector('.burger');
 const burgerMenu = document.querySelector('.burger-menu');
@@ -11,9 +14,6 @@ let burgerItems = document.querySelectorAll('.inter');
 overlay.classList.add('overlay');
 header.appendChild(overlay);
 burger.addEventListener('click', function() {
-    // if(!modalLogIn.classList.contains('visible-modal')) {
-    //     activeBurger();
-    // }
     activeBurger();
 });
 overlay.addEventListener('click', deactiveBurger);
@@ -35,9 +35,6 @@ function activeBurger() {
     header.classList.add('active');
     divUser.classList.remove('active');
     bodyLock();
-    // if (!windowUser.classList.contains('hidden-start') && !windowUser.classList.contains('hidden')) {
-    //     toggleRegWindow();
-    // }
     if (!windowUser.classList.contains('hidden-start') && !windowUser.classList.contains('hidden')) {
         deactiveRegWindow();
     }
@@ -200,12 +197,11 @@ function updateScreen() {
 updateScreen();
 window.addEventListener('resize', updateScreen);
 
-
 //---
 const iconSvg = document.getElementById('icon_svg');
 const iconRegUser = document.getElementById('icon-reg-user');
-iconRegUser.style.display = 'none';
 //---
+
 
 //SEASON
 const book = document.querySelectorAll('.book');
@@ -217,8 +213,6 @@ const winter = document.getElementById('winter');
 const spring = document.getElementById('spring');
 const summer = document.getElementById('summer');
 const autumn = document.getElementById('autumn');
-
-const disabled = document.querySelector('.gold-btn');
 
 let entries = Object.entries(bookInfo);
 const setTime = '200';
@@ -243,31 +237,16 @@ function seasons (countIMG, count) {
     }, setTime);
 }
 
-function addButton() {
-    setTimeout(() => {
-        disabled.setAttribute('disabled', 'disabled');
-        disabled.innerHTML = 'Own';
-        disabled.classList.add('gold-btn');
-    }, setTime);
-}
-
-function removeButton() {
-    setTimeout(() => {
-        disabled.removeAttribute('disabled');
-        disabled.innerHTML = 'Buy';
-        disabled.classList.remove('gold-btn');
-    }, setTime);
-}
-removeButton();
-
 winter.addEventListener('click', function(event) {
     event.target.setAttribute('disabled', 'disabled');
     spring.removeAttribute('disabled');
     summer.removeAttribute('disabled');
     autumn.removeAttribute('disabled');
     seasons(1, 0);
-    // addButton();
-    removeButton();
+    setTimeout(() => {
+        checkButton();
+    }, 300);
+
 });
 spring.addEventListener('click', function(event) {
     event.target.setAttribute('disabled', 'disabled');
@@ -275,8 +254,9 @@ spring.addEventListener('click', function(event) {
     summer.removeAttribute('disabled');
     autumn.removeAttribute('disabled');
     seasons(5, 4);
-    // addButton();
-    removeButton();
+    setTimeout(() => {
+        checkButton();
+    }, 300);
 });
 summer.addEventListener('click', function(event) {
     event.target.setAttribute('disabled', 'disabled');
@@ -284,7 +264,9 @@ summer.addEventListener('click', function(event) {
     winter.removeAttribute('disabled');
     autumn.removeAttribute('disabled');
     seasons(9, 8);
-    removeButton();
+    setTimeout(() => {
+        checkButton();
+    }, 300);
 });
 autumn.addEventListener('click', function(event) {
     event.target.setAttribute('disabled', 'disabled');
@@ -292,7 +274,9 @@ autumn.addEventListener('click', function(event) {
     summer.removeAttribute('disabled');
     winter.removeAttribute('disabled');
     seasons(13, 12);
-    removeButton();
+    setTimeout(() => {
+        checkButton();
+    }, 300);
 });
 
 const seasonsContainer = document.querySelector('.seasons-container');
@@ -379,9 +363,6 @@ function deactiveRegWindow() {
 //CLICK
 profile.map((item) => {
     item.addEventListener('click', function() {
-        // if(!item.classList.contains('visible-modal')) {
-        //     activeRegWindow();   <---- I will delete it, if I don't remember what it's
-        // }
         activeRegWindow();
     });
 });
@@ -417,6 +398,8 @@ login.addEventListener('click', function() {
         // console.log('I press: Log In')
     } else {
         // console.log('I press: My profile')
+        openMyProfile();
+        bodyLock();
     }
 });
 
@@ -439,6 +422,8 @@ loginMain.addEventListener('click', function() {
         bodyLock();
     } else {
         // console.log('I press: Profile')
+        openMyProfile();
+        bodyLock();
     }
 
 });
@@ -524,6 +509,10 @@ overlayModal.addEventListener('click', function() {
         overlayModal.style.zIndex = '-1';
         bodyUnlock();
     }
+    else {
+        closeMyProfile();
+        closeBuyCard();
+    }
 });
 
 cross = [...cross];
@@ -538,6 +527,9 @@ if (Array.isArray(cross)) {
             choiceModal(modalRegister);
             overlayModal.style.zIndex = '-1';
             bodyUnlock();
+        } else {
+            overlayModal.style.zIndex = '-1';
+            closeBuyCard();
         }
     }));
 }
@@ -554,12 +546,11 @@ function resetForm() {
 //SUBMIT TO LOCALSTAGE
 let user = {};
 const formReg = document.getElementById('form-reg');
-
+let bycard = '';
 
 formReg.addEventListener("submit", function(event) {
     const maxNumber = 99999999;
     let randomNumber = `F${Math.floor(Math.random() * maxNumber)}`;
-
 
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
@@ -571,13 +562,15 @@ formReg.addEventListener("submit", function(event) {
     user.email = email;
     user.password = password;
     user.number = randomNumber;
+    user.books = {};
+    bycard = false;
 
+    localStorage.setItem('bycard', JSON.stringify(bycard));
     localStorage.setItem('user', JSON.stringify(user));
 
-    alert('registration successful');
+    alert('Registration successful');
 
     if(modalRegister.classList.contains('visible-modal')) {
-        // choiceModal(modalRegister);
         modalRegister.classList.add('hidden-modal');
         modalRegister.classList.remove('visible-modal');
         modalWindows.classList.remove('active');
@@ -585,6 +578,7 @@ formReg.addEventListener("submit", function(event) {
         overlayModal.style.zIndex = '-1';
         bodyUnlock();
     }
+
     authorisation();
 })
 
@@ -631,7 +625,8 @@ titleInfo3.innerText = 'Books';
 
 numInfo1.innerText = '23';
 numInfo2.innerText = '1240';
-numInfo3.innerText = '2';
+numInfo3.innerText = '0';
+
 
 function libraryCard() {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -671,7 +666,6 @@ function novisit() {
     signUpMain.style.opacity = '1';
     signUpMain.style.pointerEvents = 'auto';
     loginMain.innerHTML = 'Log in';
-    // loginMain.classList.remove('text-btn');
 }
 
 buttonCheckCard.addEventListener('click', function(event) {
@@ -683,9 +677,8 @@ buttonCheckCard.addEventListener('click', function(event) {
 
         setTimeout(() => {
             removeLibraryCard()
-        }, 3000);
+        }, 10000);
     } else {console.log('WRONG!')}
-
 })
 
 //ICON CHANGE FOR AUTHORISATION
@@ -698,8 +691,8 @@ function iconChange() {
     const title = `${storedUser.name} ${storedUser.lastname}`;
     iconRegUser.setAttribute('title', title);
 
-    const userRegistratioTitle = document.querySelector('.user-registratio-title');
-    userRegistratioTitle.innerHTML = (storedUser.name.split('').slice(0, 1)+storedUser.lastname.split('').slice(0, 1)).toUpperCase();
+    const userRegistrationTitle = document.querySelector('.user-registration-title');
+    userRegistrationTitle.innerHTML = (storedUser.name.split('').slice(0, 1)+storedUser.lastname.split('').slice(0, 1)).toUpperCase();
 
 }
 
@@ -716,6 +709,16 @@ function authorisation() {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     windowUserOneField.innerHTML = storedUser.number;
     windowUserOneField.classList.add('one-field-size');
+    localStorage.setItem('login', 'true');
+    if(storedUser.visit === undefined) {
+        storedUser.visit = 1;
+    } else {
+        storedUser.visit++;
+    }
+    localStorage.setItem('user', JSON.stringify(storedUser));
+    clickButton();
+    counterVisitBottom();
+    location.reload();
 }
 
 function noAuthorisation() {
@@ -727,24 +730,274 @@ function noAuthorisation() {
     removeLibraryCard();
     novisit();
 
+
     windowUserOneField.innerHTML = 'Profile';
     windowUserOneField.classList.remove('one-field-size');
+    localStorage.setItem('login', 'false');
+    clickButton();
+    location.reload();
+}
+
+if (userLogin === 'true') {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    windowUserOneField.innerHTML = storedUser.number;
+    windowUserOneField.classList.add('one-field-size');
+
+    login.innerHTML = 'My profile';
+    register.innerHTML = 'Log Out';
+    condition = false;
+    iconChange();
+    libraryCard();
+    visit();
 }
 
 //CLICK BUY ON THE FAVORITES
 let buttonBuy = document.querySelectorAll('.btn-text');
 
-buttonBuy = [...buttonBuy];
-buttonBuy.map((item) => item.addEventListener('click', function() {
-        if(condition == true) {
-            choiceModal(modalLogIn);
-            bodyLock();
-            // console.log('I press when I not register: Buy')
-        } else {
-            // console.log('I press when I not register: Buy')
+function clickButton() {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedBycard = JSON.parse(localStorage.getItem('bycard'));
+    let current = [];
+    let arrayBooks = [];
+
+    buttonBuy = [...buttonBuy];
+        buttonBuy.map((item) => item.addEventListener('click', function() {
+            if(condition === true) {
+                choiceModal(modalLogIn);
+                bodyLock();
+            }}))
+
+    if (userLogin === 'true') {
+        if(Object.keys(storedUser.books).length === 0) {
+            arrayBooks = [];
         }
-    })
-);
+        if(Object.keys(storedUser.books).length > 0) {
+            arrayBooks = storedUser.books;
+            current = storedUser.current;
+        }
+
+        buttonBuy = [...buttonBuy];
+        buttonBuy.map((item) => item.addEventListener('click', function() {
+            if(condition === true) {
+                choiceModal(modalLogIn);
+                bodyLock();
+                // console.log('I press when I not register: Buy')
+            }
+            if(storedBycard === true) {
+                // console.log('I press when I register: Buy')
+                current++;
+                let currentBook = `${item.parentElement.children[2].children[0].innerHTML}, ${item.parentElement.children[2].children[1].innerHTML}`;
+
+                for (let i = 0; i < 1; i++) {
+                    arrayBooks.push(currentBook);
+                }
+
+
+
+                storedUser.books = arrayBooks;
+                storedUser.current = current;
+                localStorage.setItem('user', JSON.stringify(storedUser));
+
+                item.classList.add('gold-btn');
+                item.setAttribute('disabled', 'disabled');
+                item.innerHTML = 'Own';
+
+                counterBooksBotton();
+            } else {
+                // console.log('Please buy card')
+                openBuyCard();
+            }
+        })
+    );
+    }
+}
+clickButton()
+
+function checkButton() {
+    let storedUser = JSON.parse(localStorage.getItem('user'));
+    let memoryBooks = [];
+    if (storedUser && storedUser.books && Object.keys(storedUser.books).length > 0) {
+        memoryBooks = Object.values(storedUser.books);
+    }
+
+    let titleStorageArr = [];
+    for (let i = 0; i < memoryBooks.length; i++) {
+        let bookStorage = memoryBooks[i].split(',');
+        let titleStorage = bookStorage[0].trim();
+        titleStorageArr.push(titleStorage);
+    }
+    if (userLogin === 'true') {
+        buttonBuy = [...buttonBuy];
+        buttonBuy.forEach((item) => {
+            const currentItem = item.parentNode.children[2].children[0].innerHTML;
+            let bookOwned = false;
+
+            for (let i = 0; i < titleStorageArr.length; i++) {
+                if (currentItem.includes(titleStorageArr[i])) {
+                    bookOwned = true;
+                    break;
+                }
+            }
+
+            if (bookOwned) {
+                item.classList.add('gold-btn');
+                item.setAttribute('disabled', 'disabled');
+                item.innerHTML = 'Own';
+            } else {
+                item.classList.remove('gold-btn');
+                item.removeAttribute('disabled');
+                item.innerHTML = 'Buy';
+            }
+        });
+    }
+
+}
+checkButton();
+
+//MY PROFILE
+const moadlProfile = document.querySelector('.modal-profile');
+moadlProfile.classList.add('hidden-start');
+function openMyProfile() {
+    moadlProfile.classList.add('visible-modal');
+    moadlProfile.classList.remove('hidden-start');
+    modalWindows.classList.add('active');
+    overlayModal.style.zIndex = '3';
+    deactiveRegWindow();
+
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const nameShort = document.querySelector('.name-short');
+    nameShort.innerHTML = (storedUser.name.split('').slice(0, 1)+storedUser.lastname.split('').slice(0, 1)).toUpperCase();
+    const nameFull = document.querySelector('.name-full');
+    nameFull.innerHTML = `${storedUser.name} ${storedUser.lastname}`;
+    const cardNum = document.getElementById('card-num');
+    cardNum.innerHTML = storedUser.number;
+    const bookCurrent = document.getElementById('num-info-details-3');
+    const visit = document.getElementById('num-info-details-1');
+    visit.innerHTML = storedUser.visit;
+
+    if(storedUser.current === undefined) {
+        bookCurrent.innerHTML = '0';
+        numInfo3.innerHTML = '0';
+    } else {
+        bookCurrent.innerHTML = storedUser.current;
+        numInfo3.innerHTML = storedUser.current;
+    }
+
+
+    let arrayBooks = storedUser.books;
+    localStorage.setItem('user', JSON.stringify(storedUser));
+
+
+    const liElement = document.querySelector('.books');
+    while (liElement.firstChild) {
+        liElement.removeChild(liElement.firstChild);
+    }
+
+    for (let i = 0; i < arrayBooks.length; i++) {
+        const liElements = document.querySelector('.books');
+        let addBook = document.createElement('li');
+        liElements.appendChild(addBook);
+        addBook.innerHTML = arrayBooks[i];
+    }
+}
+
+function closeMyProfile() {
+    moadlProfile.classList.remove('visible-modal');
+    moadlProfile.classList.add('hidden-start');
+    modalWindows.classList.remove('active');
+    overlayModal.style.zIndex = '-1';
+    bodyUnlock();
+}
+
+const crossProfile = document.querySelector('.cross-for-profile');
+crossProfile.addEventListener('click', closeMyProfile);
+
+function counterBooksBotton() {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if(storedUser === null || storedUser.current === undefined) {
+        numInfo3.innerHTML = '0';
+    } else {
+        numInfo3.innerHTML = storedUser.current;
+    }
+}
+counterBooksBotton()
+
+function counterVisitBottom() {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if(storedUser === null || storedUser.visit === undefined) {
+        numInfo1.innerHTML = '1';
+    } else {
+        numInfo1.innerHTML = storedUser.visit;
+    }
+}
+counterVisitBottom()
+
+const formLog = document.getElementById('form-log');
+
+formLog.addEventListener("submit", function() {
+    const emailLog = document.getElementById('email-log');
+    const passwordLog = document.getElementById('password-log');
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+
+    if(emailLog.value === storedUser.email && passwordLog.value === storedUser.password) {
+        alert('Successfully');
+        authorisation();
+    } else {
+        alert('Wrong e-mail or password');
+    }
+})
+
+const modalBuyCard = document.querySelector('.modal-buy-a-card');
+function openBuyCard() {
+    modalBuyCard.classList.remove('hidden-start');
+    modalWindows.classList.add('active');
+    modalBuyCard.style.zIndex = '5';
+    overlayModal.style.zIndex = '3';
+    bodyLock();
+}
+
+function closeBuyCard() {
+    modalBuyCard.classList.add('hidden-start');
+    modalWindows.classList.remove('active');
+    modalBuyCard.style.zIndex = '-1';
+    bodyUnlock();
+}
+
+const formByCard = document.getElementById('form-buy-card');
+let formField = document.querySelectorAll('.check-form');
+let submit = document.getElementById('submit');
+
+function checkForm() {
+    let isFormValid = true;
+
+    formField.forEach(item => {
+        if (item.value === '') {
+            isFormValid = false;
+            return;
+        }
+    });
+
+    if (isFormValid) {
+        submit.classList.remove('disabled_button');
+    } else {
+        submit.classList.add('disabled_button');
+    }
+}
+
+formField.forEach(item => {
+    item.addEventListener('input', checkForm);
+});
+
+checkForm();
+
+formByCard.addEventListener("submit", function() {
+    localStorage.setItem('bycard', JSON.stringify(true));
+});
+
+
+
+// });
+
 
 
 // console.log(
@@ -788,13 +1041,13 @@ buttonBuy.map((item) => item.addEventListener('click', function() {
 //       - Данные созраняются в хранилище localStorage, в том числе и пароль, хотя в реальной жизни так делать нельзя. +2 ✅
 //       - Иконка пользователя меняется на заглавные буквы имени. +2 ✅
 //       - Отображение страницы приходит в состояение после авторизации (этап 4). +2 ✅
-//       - Будет сгенерирован девятизначный Card Number случайным образом в формате 16-ричного числа. +2 ✅
+//       - Будет сгенерирован девятизначный Card Number случайным образом в формате 16-ричного числа. +2 ❌
 //       При наличии регистрации, но будучи не аторизованным:
 //       - Блок Digital Library Cards. Если введенные имя и номер карты совпадают с данными пользователя, то отображается панель с информацией, вместо кнопки Check the card на 10 секунд. +2 ✅
 //       - Там же после отображения информации, кнопка возвращается в прежнее состояние, а поля в форме сбрасываются. +2 ✅
 
 //      Этап 3: Пользователь на этапе входа в учетную запись после регистрации.
-//       Модальное окно LOGIN
+//       Модальное окно LOGIN:
 //       - Дизайн модального окна соответствует макету. +15 (позже появятся пункты оценки по каждому элементу в отдельности). ✅
 //       - При нажатии на кнопку Log In появляется модальное окно LOGIN, где есть поля E-mail or readers card и Password. +2 ✅
 //       - При нажатии кнопки Log In в блоке Digital Library Cards также появляется модальное окно LOGIN. +2 ✅
@@ -802,7 +1055,41 @@ buttonBuy.map((item) => item.addEventListener('click', function() {
 //       - При нажатии на крестик в углу окна, или на затемненную область вне этого окна, оно закрывается. +2 ✅
 //       - Для авторизации все поля должны быть не пустыми. +2 ✅
 //       - Пароль должен быть не короче 8 символов. +2 ✅
-//       Блок Favorites
+//       Блок Favorites:
 //       - Если пользователь еще не вошел в учетную запись, то при нажатии на любую кнопку Buy открывается модальное окно LOGIN. +2 ✅
+
+//      Этап 4: Пользователь после входа в учетную запись
+//      Меню профиля при нажатии на иконку с инициалами пользователя:
+//       - При наведении курсором на иконку пользователя должно отображаться полное имя пользователя (атрибут title). +2 ✅
+//       - Нажатие на иконку пользователя в хедере открывает меню, которое должно оказаться под иконкой таким образом, что правый верхний угол меню находится в той же точке, что и нижний правый угол контейнера с иконкой в хедере. Меню под иконкой. +2 ✅
+//       - На разрешении 768px при открытом бургер-меню, оно закрывается и открывается меню авторизации. +2 ✅
+//       - То же верно и в обратную сторону, кнопка бургер-меню должна быть доступна. +2 ✅
+//       - Нажатие на любую область или элемент вне меню приводят к закрытию меню профиля. +2 ❌
+//       - Вместо надписи Profile отображается девятизначный Card Number. Для Card Number можно использовать меньший шрифт чтобы надпись вметилась в контейнер, +2 ✅
+//       - Нажатие на кнопку My Profile открывает модальное окно MY PROFILE. +2 ✅
+//       - Нажатие на кнопку Log Out приводит к выходу пользователю из состояния авторизации, возвращаемся к этапу #1. +2 ✅
+//      Модальное окно MY PROFILE:
+//       - Дизайн модального окна соответствует макету. +15 (позже появятся пункты оценки по каждому элементу в отдельности). ✅
+//       - В случае если имя и фамилия слешиком длинные и не влазят в блок то должен произойти перенос фамилии на следующую строку. ✅
+//       - Счетчик для Visits отображает, сколько раз пользователь проходил процесс авторизации, включая самый первый - регистрацию. +2 ✅
+//       - Счетчик для Books отображает, сколько у пользователя книг находятся в состоянии Own. Значение варьируется 0-16. +2 ✅
+//       - Рядом с Card Number есть кнопка, нажатие на которую копирует код карты клиента в буфер обмена. +2 ❌
+//       - Окно центрировано, а область вокруг затемнена (насколько затемнена - не имеет значения). +2 ✅
+//       - При нажатии на крестик в углу окна, или на затемненную область вне этого окна, оно закрывается. +2 ✅
+//      Блок Favorites:
+//       - При нажатии на любую кнопку Buy, еще до покупки абонемента, открывается модальное окно BUY A LIBRARY CARD. +2 ✅
+//       - При нажатии на любую кнопку Buy, после покупки абонемента, меняет вид кнопки на неактивную Own, добавляя единицу к счетчику книг в профиле. +2 ✅
+//       - Кроме того после нажатия обновляется не только счетчик, но и название книги должно отобразится в разделе Rented Books. Название формируется по принципу <название книги>, <автор книги>. В случае если название книги слишком длинное или список стал слишком большой список книг в блоке Rented Books становится скроллируемым (по необходимости горизонтально/ вертикально или оба скролла сразу) Тайтл Rented Books скроллироваться не должен +2 ✅
+//      Модальное окно BUY A LIBRARY CARD
+//       - Модальное окно нужно сделать шириной 640px. Будет это обрезка по 5px по бокам, или просто уменьшение длины с сохранением сетки - значения не имеет, хотя при правильной сеточной структуре, сделать это будет намного проще. +2 ✅
+//       - Дизайн модального окна соответствует макету. +15 (позже появятся пункты оценки по каждому элементу в отдельности). ✅
+//       - При нажатии на крестик в углу окна, или на затемненную область вне этого окна, оно закрывается. +2 ✅
+//       - Для того, чтобы кнопка Buy была активна, все поля должны быть не пустыми. +2 ✅
+//       - Bank card number должен содержать 16 цифр. С пробелами каждые 4 символа или нет - значения не имеет. +2 ✅
+//       - Expiration code содержит 2 поля с ограничением в 2 цифры. +2 ✅
+//       - CVC должен содержать 3 цифры. +2 ✅
+//       - После удачного нажатия на кнопку Buy, окно закрывается, и больше мы к нему не возвращаемся. ✅
+//      Блок Digital Library Cards:
+//       - При наличии авторизации вместо кнопки Check the Card будут отображаться данные пользователя и бейджи, как на дизайне LibraryCard after login in account. +2 ✅
 //      `
 // )

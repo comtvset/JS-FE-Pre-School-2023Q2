@@ -142,14 +142,14 @@ header .active + .overlay {
 
 main .active + .overlay {
   opacity: 1;
-  z-index: 2;
+  z-index: 3;
 }
 
 body.lock {
   overflow: hidden;
 }
 
-.user-registratio-title {
+.user-registration-title {
   color: #BB945F;
   font-family: Inter;
   font-size: 15px;
@@ -159,6 +159,12 @@ body.lock {
   display: flex;
   justify-content: center;
   padding-top: 4px;
+  transition: 0.5s;
+}
+
+.user-registration-title:hover {
+  color: #000000;
+  transition: 0.5s;
 }
 
 @media (max-width: 1075px) {
@@ -715,7 +721,7 @@ button:hover {
     padding-right: 38px;
     position: sticky;
     top: 10px;
-    z-index: 5;
+    z-index: 3;
   }
 }
 .letter-sp {
@@ -1296,18 +1302,28 @@ header .active ~ .overlay-transparent {
   width: 200px;
   height: 20px;
   border: 1px solid #BB945F;
+  padding-left: 3px;
 }
 
 .modal-log > input[type=password] {
   width: 200px;
   height: 20px;
   border: 1px solid #BB945F;
+  padding-left: 3px;
 }
 
 .modal-log > input[type=text] {
   width: 200px;
   height: 20px;
   border: 1px solid #BB945F;
+  padding-left: 3px;
+}
+
+.modal-log > input[type=number] {
+  width: 200px;
+  height: 20px;
+  border: 1px solid #BB945F;
+  padding-left: 3px;
 }
 
 .form > button {
@@ -1358,6 +1374,278 @@ header .active ~ .overlay-transparent {
 
 .details {
   padding-bottom: 16px;
+}
+
+.modal-profile {
+  width: 600px;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+.profile-name-block {
+  display: flex;
+  flex-direction: column;
+  background: #0C0C0E;
+  width: 170px;
+  justify-content: center;
+  align-items: center;
+}
+
+.name-short-block {
+  background: #ffffff;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.name-short {
+  color: #BB945F;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 27px;
+}
+
+.name-full-block {
+  background: #ffffff;
+  min-height: 30px;
+  width: 120px;
+  display: flex;
+  margin-bottom: -2px;
+}
+
+.name-full {
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  padding-right: 15px;
+  word-break: break-word;
+}
+
+.cross-for-profile {
+  position: absolute;
+  top: 20px;
+  left: 387px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.profile-details-block {
+  position: relative;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-top: 16px;
+  padding-bottom: 23px;
+}
+
+.profile-details-block > h2 {
+  letter-spacing: 0.8px;
+  margin: 0;
+  margin-top: 14px;
+  padding-right: 203px;
+}
+
+.info-details-block {
+  height: 81px;
+  width: 237px;
+  display: flex;
+  margin-top: 25px;
+  margin-bottom: 0px;
+  justify-content: space-between;
+}
+
+.info-details-block > .icon-container {
+  height: 91px;
+  justify-content: space-around;
+}
+
+.book-block {
+  margin-top: 21px;
+  padding-bottom: 14px;
+}
+
+#title-info-details-1 {
+  font-size: 20px;
+}
+
+#title-info-details-2 {
+  font-size: 20px;
+}
+
+#title-info-details-3 {
+  font-size: 20px;
+}
+
+.book-block > span {
+  font-size: 25px;
+}
+
+.books {
+  display: flex;
+  flex-direction: column;
+  margin-top: 26px;
+  padding-left: 31px;
+  max-height: 58px;
+  max-width: 410px;
+  overflow: auto;
+}
+
+.books > li {
+  list-style-type: disc;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 2px;
+  padding-bottom: 9px;
+}
+
+.card-number {
+  position: absolute;
+  top: 340px;
+  left: 20px;
+}
+
+.card-number > :first-child {
+  padding-right: 12px;
+}
+
+.card-number > :last-child {
+  color: #BB945F;
+}
+
+.modal-buy-a-card {
+  width: 640px;
+  height: 540px;
+  background: #FFFFFF;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.modal-buy-a-card > .cross {
+  position: absolute;
+  color: #FFF;
+  top: 20px;
+  left: 597px;
+}
+
+.modal-buy-a-card > .modal-login-forum {
+  color: #FFF;
+  font-size: 40px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin: 0;
+  background: #000;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 30px;
+}
+
+.wrapper-for-by-card {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-buy-card > .modal-log {
+  margin-left: 35px;
+}
+
+#exp1,
+#exp2,
+#cvc {
+  width: 41px;
+  margin-right: 5px;
+}
+
+.padding-exp {
+  padding-right: 50px;
+}
+
+.padding-cvc {
+  padding-right: 120px;
+}
+
+.separate {
+  margin-top: 10px;
+}
+
+.button-card {
+  display: flex;
+  align-items: flex-end;
+}
+
+.button-card > button {
+  margin-left: 35px;
+  margin-top: 10px;
+}
+
+.price-card {
+  color: #0C0C0E;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  flex-grow: 100;
+  margin-left: 25px;
+}
+
+.info-buy-card {
+  margin-right: 35px;
+}
+
+.box-info-buy-card {
+  margin-left: 40px;
+}
+
+.box-info-buy-card > .inter {
+  color: #8E8E8E;
+  font-size: 15px;
+  letter-spacing: 2px;
+  line-height: 20px;
+}
+
+.disabled_button {
+  border: 1px solid #8E8E8E;
+  background-color: #d4d4d4;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .registration-window {
