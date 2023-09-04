@@ -24,11 +24,16 @@
                 <li><a href="#card"><span class="inter">Library Card</span></a></li>
             </ul>
         </nav>
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="profile">
-            <g id="icon_profile">
-            <path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM18.6667 7.77778C18.6667 10.3551 16.5774 12.4444 14.0001 12.4444C11.4227 12.4444 9.33339 10.3551 9.33339 7.77778C9.33339 5.20045 11.4227 3.11111 14.0001 3.11111C16.5774 3.11111 18.6667 5.20045 18.6667 7.77778ZM19.4998 16.2781C20.9584 17.7367 21.7778 19.715 21.7778 21.7778H14L6.22225 21.7778C6.22225 19.715 7.0417 17.7367 8.50031 16.2781C9.95893 14.8194 11.9372 14 14 14C16.0628 14 18.0411 14.8194 19.4998 16.2781Z" fill="white"/>
-            </g>
-        </svg>
+        <div class="icon-user">
+            <div id="icon_svg">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="profile">
+                    <g id="icon_profile">
+                    <path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM18.6667 7.77778C18.6667 10.3551 16.5774 12.4444 14.0001 12.4444C11.4227 12.4444 9.33339 10.3551 9.33339 7.77778C9.33339 5.20045 11.4227 3.11111 14.0001 3.11111C16.5774 3.11111 18.6667 5.20045 18.6667 7.77778ZM19.4998 16.2781C20.9584 17.7367 21.7778 19.715 21.7778 21.7778H14L6.22225 21.7778C6.22225 19.715 7.0417 17.7367 8.50031 16.2781C9.95893 14.8194 11.9372 14 14 14C16.0628 14 18.0411 14.8194 19.4998 16.2781Z" fill="white"/>
+                    </g>
+                </svg>
+            </div>
+            <div id="icon-reg-user" class="profile" style="display: none;"><span class="user-registration-title"></span></div>
+        </div>
         <div class="burger">
             <span></span>
         </div>
@@ -75,25 +80,23 @@
                 <h2>favorites</h2>
                 <div class="line"></div>
             </div>
-            <div class="favorites-content">
-                <p>Pick favorites of season</p>
-                <div class="seasons-container">
-                    <div class="season">
-                        <input type="radio" id="winter" name="select-season" class="season-radio" checked>
-                        <label for="winter">Winter</label>
-                    </div>
-                    <div class="season">
-                        <input type="radio" id="spring" name="select-season" class="season-radio">
-                        <label for="spring">Spring</label>
-                    </div>
-                    <div class="season">
-                        <input type="radio" id="summer" name="select-season" class="season-radio">
-                        <label for="summer">Summer</label>
-                    </div>
-                    <div class="season">
-                        <input type="radio" id="autumn" name="select-season" class="season-radio">
-                        <label for="autumn">Autumn</label>
-                    </div>
+            <p>Pick favorites of season</p>
+            <div class="seasons-container">
+                <div class="season">
+                    <input type="radio" id="winter" name="select-season" class="season-radio" checked>
+                    <label for="winter">Winter</label>
+                </div>
+                <div class="season">
+                    <input type="radio" id="spring" name="select-season" class="season-radio">
+                    <label for="spring">Spring</label>
+                </div>
+                <div class="season">
+                    <input type="radio" id="summer" name="select-season" class="season-radio">
+                    <label for="summer">Summer</label>
+                </div>
+                <div class="season">
+                    <input type="radio" id="autumn" name="select-season" class="season-radio">
+                    <label for="autumn">Autumn</label>
                 </div>
             </div>
             <div class="favorites-items">
@@ -159,7 +162,7 @@
                         <div class="discription">
                             <p>A timely and revelatory new biography of Queen Elizabeth (and her family) exploring how the Windsors have evolved and thrived as the modern world has changed around them.</p>
                         </div>
-                        <button class="gold-btn btn-text" disabled>Own</button>
+                        <button class="btn-text">Buy</button>
                     </div>
                     <div class="book-img">
                         <img src="./assets/image/book_4.png" alt="book_4">
@@ -262,24 +265,157 @@
             </div>
             <div class="card-box">
                 <form action="input.php" class="your-card">
-                    <p>Find your Library card</p>
+                    <p id="title-field-card">Find your Library card</p>
                     <div class="field-card">
                         <h3>Brooklyn Public Library</h3>
-                        <input type="text" name="name" class="style-place" placeholder="Reader's name">
-                        <input type="number" name="number" class="style-place" placeholder="Card number">
+                        <input type="text" name="name" class="style-place" id="user-full-name" placeholder="Reader's name">
+                        <input type="text" name="number" class="style-place" id="card-number" placeholder="Card number">
                     </div>
-                    <button><span class="button-check">Check the card</span></button>
+                    <button type="submit" id="check-card"><span class="button-check">Check the card</span></button>
                 </form>
                 <div class="registration">
-                    <h3>Get a reader card</h3>
+                    <h3 id="card-field-1">Get a reader card</h3>
                     <p class="reg-box">You will be able to see a reader card after logging into account or you can register a new account</p>
                     <div class="reg-btn">
-                        <button><span class="text-btn">Sign Up</span></button>
-                        <button><span class="text-btn">Log in</span></button>
+                        <button id="sign-up-main"><span class="text-btn">Sign Up</span></button>
+                        <button id="log-in-main"><span class="text-btn">Log in</span></button>
                     </div>
                 </div>
             </div>
         </section>
+        <div class="modal-windows">
+            <div class="modal-log-in">
+                <span class="cross">&#10006;</span>
+                <span class="modal-login-forum">Login</span>
+                <form id="form-log" class="form">
+                    <div class="modal-log">
+                        <label for="email" class="modal-login-inter">E-mail or readers card</label>
+                        <input type="email" id="email-log" name="email" class="modal-login-inter" required>
+                    </div>
+                    <div class="modal-log">
+                        <label for="password" class="modal-login-inter">Password</label>
+                        <input type="password" id="password-log" name="password" class="modal-login-inter" minlength="8" required>
+                    </div>
+                    <button type="submit"><span class="text-btn">Log in</span></button>
+                    <div class="details">
+                        <span class="modal-text-question">Don't have an account?</span>
+                        <span class="modal-choice" id="sign-up-modal">Register</span>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-register">
+                <span class="cross">&#10006;</span>
+                <span class="modal-login-forum">Register</span>
+                <form id="form-reg" class="form">
+                    <div class="modal-log">
+                        <label for="first-name" class="modal-login-inter">First name</label>
+                        <input type="text" id="first-name" name="first-name" class="modal-login-inter" minlength="3" required>
+                    </div>
+                    <div class="modal-log">
+                        <label for="last-name" class="modal-login-inter">Last name</label>
+                        <input type="text" id="last-name" name="last-name" class="modal-login-inter" minlength="3" required>
+                    </div>
+                    <div class="modal-log">
+                        <label for="email" class="modal-login-inter">E-mail</label>
+                        <input type="email" id="email-reg" name="email" class="modal-login-inter" required>
+                    </div>
+                    <div class="modal-log">
+                        <label for="password" class="modal-login-inter">Password</label>
+                        <input type="password" id="password-reg" name="password" class="modal-login-inter" minlength="8" required>
+                    </div>
+                    <button type="submit"><span class="text-btn">Sign Up</span></button>
+                    <div class="details">
+                        <span class="modal-text-question">Already have an account?</span>
+                        <span class="modal-choice" id="log-in-modal">Login</span>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-profile hidden-start">
+                <div class="profile-name-block">
+                    <div class="name-short-block">
+                        <span class="name-short">JD</span>
+                    </div>
+                    <div class="name-full-block">
+                        <span class="name-full">John Doe</span>
+                    </div>
+                </div>
+                <div class="profile-details-block">
+                    <h2>MY PROFILE</h2>
+                    <span class="cross-for-profile">&#10006;</span>
+                    <div class="info-details-block">
+                        <div class="icon-container">
+                            <span class="font-style" id="title-info-details-1">Visits</span>
+                            <img src="./assets/icons/icon1.svg" alt="icon-1" class="size-img">
+                            <span class="font-style" id="num-info-details-1">23</span>
+                        </div>
+                        <div class="icon-container">
+                            <span class="font-style" id="title-info-details-2">Bonuses</span>
+                            <img src="./assets/icons/icon2.svg" alt="icon-2" class="size-img">
+                            <span class="font-style" id="num-info-details-2">1240</span>
+                        </div>
+                        <div class="icon-container">
+                            <span class="font-style" id="title-info-details-3">Books</span>
+                            <img src="./assets/icons/icon3.svg" alt="icon-3" class="size-img">
+                            <span class="font-style" id="num-info-details-3">0</span>
+                        </div>
+                    </div>
+                    <div class="book-block">
+                        <span class="inter">Rented books</span>
+                        <ul class="books"></ul>
+                    </div>
+                    <div class="card-number">
+                        <span class="inter">Card number</span>
+                        <span class="inter" id="card-num">F00234030</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-buy-a-card hidden-start">
+                <span class="cross">&#10006;</span>
+                <span class="modal-login-forum">Buy a library card</span>
+                <div class="wrapper-for-by-card">
+                    <form id="form-buy-card" class="form-buy-card">
+                        <div class="modal-log">
+                            <label for="bank-card-num" class="modal-login-inter">Bank card number</label>
+                            <input type="text" id="bank-card-num" name="bank-card-num" class="modal-login-inter" title="Please enter 16 digits" pattern="[0-9]{16}" required>
+                        </div>
+                        <div class="modal-log">
+                            <label for="last-name" class="modal-login-inter padding-exp">Expiration code</label>
+                            <input type="text" id="exp1" name="exp1" class="modal-login-inter check-form" title="Please enter 2 digits" pattern="[0-9]{2}" required>
+                            <input type="text" id="exp2" name="exp2" class="modal-login-inter check-form" title="Please enter 2 digits" pattern="[0-9]{2}" required>
+                        </div>
+                        <div class="modal-log">
+                            <label for="cvc" class="modal-login-inter padding-cvc">CVC</label>
+                            <input type="text" id="cvc" name="cvc" class="modal-login-inter check-form" title="Please enter 3 digits" pattern="[0-9]{3}" required>
+                        </div>
+                        <div class="modal-log separate">
+                            <label for="cardholder-name" class="modal-login-inter">Cardholder name</label>
+                            <input type="text" id="cardholder-name" name="cardholder-name" class="modal-login-inter check-form" title="Please enter сardholder name" required>
+                        </div>
+                        <div class="modal-log">
+                            <label for="postal-code" class="modal-login-inter">Postal code</label>
+                            <input type="number" id="postal-code" name="postal-code" class="modal-login-inter check-form" title="Please enter postal code" required>
+                        </div>
+                        <div class="modal-log">
+                            <label for="city" class="modal-login-inter">City / Town</label>
+                            <input type="text" id="city" name="city" class="modal-login-inter check-form" title="Please enter city" required>
+                        </div>
+                        <div class="button-card">
+                            <button type="submit" class="disabled_button" id="submit"><span class="text-btn">Buy</span></button>
+                            <span class="price-card">$ 25.00</span>
+                        </div>
+                    </form>
+                    <div class="info-buy-card">
+                        <div class="box-info-buy-card">
+                            <span class="inter">If you are live, work, attend school, or pay property taxes in New York State, you can get a $25 digital library card right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
     <footer class="footer">
         <div class="content">
