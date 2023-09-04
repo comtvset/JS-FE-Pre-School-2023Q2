@@ -1648,6 +1648,13 @@ header .active ~ .overlay-transparent {
   pointer-events: none;
 }
 
+.copy {
+  position: fixed;
+  top: 345px;
+  left: 457px;
+  cursor: pointer;
+}
+
 .registration-window {
   position: absolute;
   width: 80px;

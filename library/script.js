@@ -1,6 +1,6 @@
 import bookInfo from './books.js';
 
-// document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     let userLogin = localStorage.getItem('login');
 
 //BURGER
@@ -549,8 +549,12 @@ const formReg = document.getElementById('form-reg');
 let bycard = '';
 
 formReg.addEventListener("submit", function(event) {
-    const maxNumber = 99999999;
-    let randomNumber = `F${Math.floor(Math.random() * maxNumber)}`;
+    const range = '0123456789ABCDEF';
+    let randomNumber = '';
+    for (let i = 0; i < 9; i++) {
+        const element = range[Math.floor(Math.random() * 16)];
+        randomNumber += element;
+    }
 
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
@@ -653,8 +657,9 @@ function visit() {
     titleFieldCard.innerHTML = 'Your Library card';
     cardField1.innerHTML = 'Visit your profile';
     cardField2.innerHTML = 'With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.';
-    signUpMain.style.opacity = '0';
-    signUpMain.style.pointerEvents = 'none';
+    // signUpMain.style.opacity = '0';
+    // signUpMain.style.pointerEvents = 'none';
+    signUpMain.style.display = 'none';
     loginMain.innerHTML = 'Profile';
     loginMain.classList.add('text-btn');
 }
@@ -663,8 +668,9 @@ function novisit() {
     titleFieldCard.innerHTML = 'Find your Library card';
     cardField1.innerHTML = 'Get a reader card';
     cardField2.innerHTML = 'You will be able to see a reader card after logging into account or you can register a new account';
-    signUpMain.style.opacity = '1';
-    signUpMain.style.pointerEvents = 'auto';
+    // signUpMain.style.opacity = '1';
+    // signUpMain.style.pointerEvents = 'auto';
+    signUpMain.style.display = 'block';
     loginMain.innerHTML = 'Log in';
 }
 
@@ -994,9 +1000,18 @@ formByCard.addEventListener("submit", function() {
     localStorage.setItem('bycard', JSON.stringify(true));
 });
 
+//copy
+const copy = document.querySelector('.copy');
+
+copy.addEventListener('click', function(){
+    const clipboard = navigator.clipboard;
+    const numberCopy = cardNumber.value;
+    clipboard.writeText(numberCopy)
+})
 
 
-// });
+
+});
 
 
 
@@ -1041,7 +1056,7 @@ formByCard.addEventListener("submit", function() {
 //       - Данные созраняются в хранилище localStorage, в том числе и пароль, хотя в реальной жизни так делать нельзя. +2 ✅
 //       - Иконка пользователя меняется на заглавные буквы имени. +2 ✅
 //       - Отображение страницы приходит в состояение после авторизации (этап 4). +2 ✅
-//       - Будет сгенерирован девятизначный Card Number случайным образом в формате 16-ричного числа. +2 ❌
+//       - Будет сгенерирован девятизначный Card Number случайным образом в формате 16-ричного числа. +2 ✅
 //       При наличии регистрации, но будучи не аторизованным:
 //       - Блок Digital Library Cards. Если введенные имя и номер карты совпадают с данными пользователя, то отображается панель с информацией, вместо кнопки Check the card на 10 секунд. +2 ✅
 //       - Там же после отображения информации, кнопка возвращается в прежнее состояние, а поля в форме сбрасываются. +2 ✅
@@ -1073,7 +1088,7 @@ formByCard.addEventListener("submit", function() {
 //       - В случае если имя и фамилия слешиком длинные и не влазят в блок то должен произойти перенос фамилии на следующую строку. ✅
 //       - Счетчик для Visits отображает, сколько раз пользователь проходил процесс авторизации, включая самый первый - регистрацию. +2 ✅
 //       - Счетчик для Books отображает, сколько у пользователя книг находятся в состоянии Own. Значение варьируется 0-16. +2 ✅
-//       - Рядом с Card Number есть кнопка, нажатие на которую копирует код карты клиента в буфер обмена. +2 ❌
+//       - Рядом с Card Number есть кнопка, нажатие на которую копирует код карты клиента в буфер обмена. +2 ✅
 //       - Окно центрировано, а область вокруг затемнена (насколько затемнена - не имеет значения). +2 ✅
 //       - При нажатии на крестик в углу окна, или на затемненную область вне этого окна, оно закрывается. +2 ✅
 //      Блок Favorites:

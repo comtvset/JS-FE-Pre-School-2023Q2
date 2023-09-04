@@ -1669,6 +1669,13 @@ header .active ~ .overlay-transparent {
   pointer-events: none;
 }
 
+.copy {
+  position: fixed;
+  top: 345px;
+  left: 457px;
+  cursor: pointer;
+}
+
 //STYLE WOTHOUTHTML
 .registration-window {
   position: absolute;
