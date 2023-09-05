@@ -394,7 +394,6 @@ input[type=radio] {
   width: 26px;
   height: 26px;
   position: relative;
-  cursor: pointer;
 }
 
 .new-radio::before {
@@ -412,6 +411,11 @@ input[type=radio] {
 .new-radio:checked::before {
   background-color: #BB945F;
   transition: 0.5s;
+}
+
+.new-radio:hover:not(:checked)::before {
+  background-color: #BB945F;
+  cursor: pointer;
 }
 
 @media (max-width: 1439px) {
