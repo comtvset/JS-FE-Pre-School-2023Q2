@@ -77,19 +77,24 @@ function updateScreen() {
 
     left.style.opacity = '0.5';
     right.style.opacity = '1';
+    left.style.cursor = 'default';
 
     function opacity(count) {
         if(count == 0) {
             left.style.opacity = '0.5';
             right.style.opacity = '1';
+            left.style.cursor = 'default';
         }
         if(count > 1) {
             left.style.opacity = '1';
             right.style.opacity = '1';
+            left.style.cursor = 'pointer';
+            right.style.cursor = 'pointer';
         }
         if(count > 2196) {
             left.style.opacity = '1';
             right.style.opacity = '0.5';
+            right.style.cursor = 'default';
         }
     }
 
