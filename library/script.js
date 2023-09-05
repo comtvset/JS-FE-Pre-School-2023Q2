@@ -13,15 +13,30 @@ let burgerItems = document.querySelectorAll('.inter');
 
 overlay.classList.add('overlay');
 header.appendChild(overlay);
+
+let stateBurger = false;
+
 burger.addEventListener('click', function() {
-    activeBurger();
+    if(stateBurger == false) {
+        activeBurger();
+        stateBurger = true;
+    } else {
+        deactiveBurger();
+        stateBurger = false;
+    }
 });
-overlay.addEventListener('click', deactiveBurger);
+overlay.addEventListener('click', function() {
+    deactiveBurger();
+    stateBurger = false;
+});
 
 
 burgerItems = [...burgerItems];
 if (Array.isArray(burgerItems)) {
-    burgerItems.map((item) => item.addEventListener('click', deactiveBurger));
+    burgerItems.map((item) => item.addEventListener('click', function() {
+        deactiveBurger();
+        stateBurger = false;
+    }))
 } else {
     console.log("error: burgerItems is not an array!");
 }
@@ -697,7 +712,7 @@ buttonCheckCard.addEventListener('click', function(event) {
         setTimeout(() => {
             removeLibraryCard()
         }, 10000);
-    } else {console.log('WRONG!')}
+    }
 })
 
 //ICON CHANGE FOR AUTHORISATION
