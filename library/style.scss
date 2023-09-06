@@ -1543,6 +1543,7 @@ header .active ~ .overlay-transparent {
   max-height: 58px;
   max-width: 410px;
   overflow: auto;
+  white-space: nowrap;
 }
 
 .books > li {
