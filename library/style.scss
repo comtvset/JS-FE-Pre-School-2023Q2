@@ -1539,11 +1539,17 @@ header .active ~ .overlay-transparent {
   display: flex;
   flex-direction: column;
   margin-top: 26px;
-  padding-left: 31px;
+  padding-left: 0px;
   max-height: 58px;
   max-width: 410px;
   overflow: auto;
   white-space: nowrap;
+}
+
+@media (max-width: 1075px) {
+  .books {
+    padding-left: 31px;
+  }
 }
 
 .books > li {
