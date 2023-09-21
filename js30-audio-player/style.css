@@ -11,12 +11,13 @@ a {
 }
 
 body {
-    background-image: url(./assets/images/background.jpg);
+    background-image: url(./assets/images/background_1.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     height: 100vh;
     backdrop-filter: blur(9px);
+    transition: 0.5s;
 }
 
 .player {
@@ -55,6 +56,19 @@ body {
     transform: rotate(44deg);
 }
 
+.cover-img.active {
+    animation: rotation 9s linear infinite;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(44deg);
+    }
+    to {
+        transform: rotate(404deg);
+    }
+}
+
 .tonearm-img {
     position: relative;
     block-size: 390px;
@@ -62,6 +76,32 @@ body {
     left: -203px;
     transform: rotate(331deg);
     transform-origin: 79.5% 14.6%;
+}
+
+.tonearm-img.play {
+    animation: play 2s forwards;
+}
+
+@keyframes play {
+    from {
+        transform: rotate(331deg);
+    }
+    to {
+        transform: rotate(346deg);
+    }
+}
+
+.tonearm-img.stop {
+    animation: stop 2s forwards;
+}
+
+@keyframes stop {
+    from {
+        transform: rotate(346deg);
+    }
+    to {
+        transform: rotate(331deg);
+    }
 }
 
 .time {
@@ -127,14 +167,16 @@ input[type='range']::-webkit-slider-thumb {
 .time-container {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .display-volume {
     text-align: start;
 }
 
-.time-start {
+.time-progress {
     width: 65px;
+    text-align: start;
 }
 
 .time-full {
@@ -142,8 +184,9 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 .progress {
-    margin: 0px 10px 0px 10px;
+    /* margin: 0px 10px 0px 10px; */
     width: 77px;
+    text-align: start;
 }
 
 .volume-control {
@@ -177,7 +220,23 @@ input[type='range']::-webkit-slider-thumb {
     overflow: hidden;
 }
 
-.play {
+.title-song {
+    animation: line 10s linear infinite alternate;
+}
+
+@keyframes line {
+    0% {
+      transform: translateX(0%);
+    }
+    20% {
+        transform: translateX(0%);
+      }
+    100% {
+      transform: translateX(-150%);
+    }
+  }
+
+.play-btn {
     position: relative;
     top: -48px;
     left: -300px;
@@ -187,14 +246,14 @@ input[type='range']::-webkit-slider-thumb {
     font-size: 10px;
 }
 
-.back {
+.back-btn {
     position: relative;
     top: -25px;
     left: -290px;
     padding-right: 2px;
 }
 
-.forward {
+.forward-btn {
     position: relative;
     top: -25px;
     left: -283px;
