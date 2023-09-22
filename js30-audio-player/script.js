@@ -9,9 +9,34 @@ const backgroundBody = document.body,
     tonearm = document.querySelector('.tonearm-img'),
     timeProgress = document.querySelector('.time-progress'),
     fullTime = document.querySelector('.time-full'),
-    rangeVolume = document.querySelector('.range-volume');
+    rangeVolume = document.querySelector('.range-volume'),
+    progress = document.querySelector('.progress'),
+    display = document.querySelector('.display'),
+    displayVolume = document.querySelector('.display-volume'),
+    volumeBtn = document.querySelector('.volume'),
+    myCheckbox = document.getElementById('myCheckbox');
 
-const songs = ['David Rawlings - Cumberland Gap', 'Rivière Monk - Voyage'];
+const songs = [
+    'Senbeï - Rain by Banzaï Lab',
+    'Vandelux - Stimulus',
+    'Rivière Monk - Voyage',
+    'David Rawlings - Cumberland Gap',
+];
+
+function getRotationDegrees(matrix) {
+    let angle = Math.round(Math.atan2(matrix.b, matrix.a) * (180 / Math.PI));
+    return angle < 0 ? angle + 360 : angle;
+}
+
+function rotation() {
+    let transformValue = window
+        .getComputedStyle(cover, null)
+        .getPropertyValue('transform');
+    let transformMatrix = new DOMMatrix(transformValue);
+    let rotationDegrees = getRotationDegrees(transformMatrix);
+
+    return rotationDegrees;
+}
 
 let handler = true;
 
@@ -48,13 +73,13 @@ function initSong(song) {
         songIndex + 1
     }.jpg)`;
 }
-initSong(songs[songIndex]);
 
 function playSong() {
     disableButton();
     player.classList.add('play');
     tonearm.classList.add('play');
     tonearm.classList.remove('stop');
+    playBtn.classList.remove('waiting');
 
     setTimeout(function () {
         cover.classList.add('active');
@@ -68,6 +93,7 @@ function pauseSong() {
     tonearm.classList.add('stop');
     tonearm.classList.remove('play');
     audio.pause();
+    playBtn.classList.add('waiting');
 }
 
 function nextSong() {
@@ -130,6 +156,7 @@ playBtn.addEventListener('click', () => {
 });
 
 function setTime() {
+    // progress.value = (audio.currentTime / audio.duration) * 100
     let minutes = Math.floor(audio.currentTime / 60);
     if (minutes < 10) {
         minutes = '0' + String(minutes);
@@ -142,7 +169,6 @@ function setTime() {
 
     timeProgress.innerHTML = `${minutes}:${seconds}`;
 }
-audio.addEventListener('timeupdate', setTime);
 
 function fullTimeFunction() {
     let minutes = Math.floor(audio.duration / 60);
@@ -155,4 +181,81 @@ function fullTimeFunction() {
     }
     fullTime.innerHTML = `${minutes}:${seconds}`;
 }
-audio.addEventListener('durationchange', fullTimeFunction);
+
+function updateProgress(event) {
+    const { duration, currentTime } = event.srcElement;
+    const progressPercent = (currentTime / duration) * 100;
+    const clampedProgress = Math.min(Math.max(progressPercent, 0), 100);
+    const numberOfDashes = Math.round((clampedProgress / 100) * 8);
+    progress.innerHTML = '-'.repeat(numberOfDashes);
+}
+
+// function setProgress(event) {
+//     const width = this.clientWidth
+//     const clickX = event.offsetX
+//     const duration = audio.duration
+//     audio.currentTime = (clickX / width) * duration
+// }
+//   progressContainer.addEventListener('click', setProgress)
+
+
+
+myCheckbox.addEventListener('change', function () {
+    if (myCheckbox.checked) {
+        display.style.backgroundColor = 'rgb(5, 71, 252)';
+        displayVolume.innerHTML = `Volume: `;
+        rangeVolume.innerHTML = '100%';
+        playBtn.style.border = '2px solid rgb(5, 133, 252)';
+        initSong(songs[songIndex]);
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('durationchange', fullTimeFunction);
+        audio.addEventListener('timeupdate', setTime);
+        audio.addEventListener('ended', nextSong);
+        playBtn.disabled = false;
+        backBtn.disabled = false;
+        forwardBtn.disabled = false;
+        volumeBtn.disabled = false;
+        myCheckbox.disabled = true;
+        playBtn.classList.add('waiting');
+        setTimeout(function () {
+            myCheckbox.disabled = false;
+        }, 2000);
+
+    } else {
+        greetings();
+        let angle = rotation();
+        cover.classList.remove('active');
+        cover.style.transform = `rotate(${angle}deg)`;
+    }
+});
+
+function greetings() {
+    pauseSong();
+    setTimeout(function () {
+        // titel.innerHTML = 'He! Do you want to listen music?';
+        // displayVolume.innerHTML = 'do it right';
+        // timeProgress.innerHTML = 'now, turn "on"';
+        titel.innerHTML = '';
+        displayVolume.innerHTML = '';
+        timeProgress.innerHTML = '';
+    }, 10);
+    backgroundBody.style.backgroundImage = `url('./assets/images/background_default.jpg')`;
+    display.style.backgroundColor = 'rgb(46, 46, 46)';
+    fullTime.innerHTML = '';
+    progress.innerHTML = '';
+    rangeVolume.innerHTML = '';
+    volumeBtn.disabled = true;
+    volumeBtn.value = '100';
+    playBtn.style.border = '2px solid rgb(34, 34, 34)';
+    playBtn.classList.remove('waiting');
+    myCheckbox.disabled = true;
+    cover.classList.add('start');
+
+    setTimeout(function () {
+        playBtn.disabled = true;
+        backBtn.disabled = true;
+        forwardBtn.disabled = true;
+        myCheckbox.disabled = false;
+    }, 2000);
+}
+greetings();
