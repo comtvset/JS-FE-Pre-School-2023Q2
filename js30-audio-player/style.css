@@ -24,17 +24,21 @@ body {
     transition: 0.5s;
 }
 
+.container {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
 .player {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: relative;
     width: 805px;
     height: 670px;
     border-radius: 10px;
     border: 5px solid rgb(36, 36, 36);
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    transform: translate(-50%, -50%);
     z-index: 2;
     text-align: center;
     padding: 15px;
@@ -295,13 +299,11 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 footer {
-    position: absolute;
-    top: 88vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: -47px;
 }
 
 .fonts-for-footer {
+    margin: 0 auto;
     font-family: 'Quicksand', sans-serif;
     color: rgb(179, 179, 179);
     display: flex;
@@ -312,6 +314,14 @@ footer {
 
 .logo {
     width: 80px;
+}
+
+@media (max-height: 768px) {
+    footer {
+        position: absolute;
+        margin-top: 0px;
+        display: none;
+    }
 }
 
 .switch input {
