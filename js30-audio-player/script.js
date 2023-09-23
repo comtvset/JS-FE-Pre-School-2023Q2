@@ -191,13 +191,13 @@ function updateProgress(event) {
 }
 
 function setProgress(event) {
-    const width = this.clientWidth
-    const clickX = event.offsetX
-    const duration = audio.duration
-    audio.currentTime = (clickX / width) * duration
+    const width = this.clientWidth;
+    const clickX = event.offsetX;
+    const duration = audio.duration;
+    audio.currentTime = (clickX / width) * duration;
 }
 
-progress.addEventListener('click', setProgress)
+progress.addEventListener('click', setProgress);
 
 myCheckbox.addEventListener('change', function () {
     if (myCheckbox.checked) {
@@ -219,7 +219,6 @@ myCheckbox.addEventListener('change', function () {
         setTimeout(function () {
             myCheckbox.disabled = false;
         }, 2000);
-
     } else {
         greetings();
         let angle = rotation();
@@ -237,11 +236,11 @@ function greetings() {
         titel.innerHTML = '';
         displayVolume.innerHTML = '';
         timeProgress.innerHTML = '';
+        progress.innerHTML = '';
     }, 10);
     backgroundBody.style.backgroundImage = `url('./assets/images/background_default.jpg')`;
     display.style.backgroundColor = 'rgb(46, 46, 46)';
     fullTime.innerHTML = '';
-    progress.innerHTML = '';
     rangeVolume.innerHTML = '';
     volumeBtn.disabled = true;
     volumeBtn.value = '100';
@@ -258,3 +257,18 @@ function greetings() {
     }, 2000);
 }
 greetings();
+
+console.log(`
+1. Вёрстка +10
+    ● вёрстка аудиоплеера: есть кнопка Play/Pause, кнопки "Вперёд" и "Назад" для пролистывания аудиотреков,
+      прогресс-бар, отображается название и автор трека +5 ✅
+    ● в футере приложения есть ссылка на гитхаб автора приложения, год создания приложения, логотип курса со ссылкой на курс +5 ✅
+2. Кнопка Play/Pause +10
+    ● есть кнопка Play/Pause, при клике по которой можно запустить или остановить проигрывание аудиотрека +5 ✅
+    ● внешний вид и функционал кнопки Play/Pause изменяется в зависимости от того, проигрывается ли в данный момент аудиотрек +5 ✅
+3. При кликах по кнопкам "Вперёд" и "Назад" переключается проигрываемый аудиотрек. Аудиотреки пролистываются по кругу - после последнего идёт первый +10 ✅
+4. При смене аудиотрека меняется изображение - обложка аудиотрека +10 ✅
+5. Прогресс-бар отображает прогресс проигрывания текущего аудиотрека. При перемещении ползунка вручную меняется текущее время проигрывания аудиотрека +10 ✅
+6. Отображается продолжительность аудиотрека и его текущее время проигрывания +10 ✅
+7. Очень высокое качество оформления приложения и/или дополнительный не предусмотренный в задании функционал, улучшающий качество приложения +10 ✅
+    ● высокое качество оформления приложения предполагает собственное оригинальное оформление равное или отличающееся в лучшую сторону по сравнению с демо`);
