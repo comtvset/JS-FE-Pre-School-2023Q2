@@ -14,7 +14,8 @@ const backgroundBody = document.body,
     display = document.querySelector('.display'),
     displayVolume = document.querySelector('.display-volume'),
     volumeBtn = document.querySelector('.volume'),
-    myCheckbox = document.getElementById('myCheckbox');
+    myCheckbox = document.getElementById('myCheckbox'),
+    welcome = document.querySelector('.welcome');
 
 const songs = [
     'Senbeï - Rain by Banzaï Lab',
@@ -22,6 +23,12 @@ const songs = [
     'Rivière Monk - Voyage',
     'David Rawlings - Cumberland Gap',
 ];
+
+setTimeout(function () {
+    player.style.opacity = '1';
+    welcome.style.opacity = '0';
+    welcome.style.zIndex = '-1';
+}, 2000);
 
 function getRotationDegrees(matrix) {
     let angle = Math.round(Math.atan2(matrix.b, matrix.a) * (180 / Math.PI));
@@ -81,6 +88,12 @@ function playSong() {
     tonearm.classList.remove('stop');
     playBtn.classList.remove('waiting');
 
+    myCheckbox.disabled = true;
+
+    setTimeout(function () {
+        myCheckbox.disabled = false;
+    }, 2000);
+
     setTimeout(function () {
         cover.classList.add('active');
         audio.play();
@@ -106,6 +119,11 @@ function nextSong() {
         }
 
         disableButton();
+        myCheckbox.disabled = true;
+
+        setTimeout(function () {
+            myCheckbox.disabled = false;
+        }, 4000);
 
         if (player.classList.contains('play')) {
             pauseSong();
@@ -131,6 +149,11 @@ function backSong() {
         }
 
         disableButton();
+        myCheckbox.disabled = true;
+
+        setTimeout(function () {
+            myCheckbox.disabled = false;
+        }, 4000);
 
         if (player.classList.contains('play')) {
             pauseSong();
@@ -205,19 +228,28 @@ myCheckbox.addEventListener('change', function () {
         displayVolume.innerHTML = `Volume: `;
         rangeVolume.innerHTML = '100%';
         playBtn.style.border = '2px solid rgb(5, 133, 252)';
+        playBtn.style.color = 'rgb(255, 255, 255)';
+        backBtn.style.color = 'rgb(255, 255, 255)';
+        forwardBtn.style.color = 'rgb(255, 255, 255)';
+
         initSong(songs[songIndex]);
         audio.addEventListener('timeupdate', updateProgress);
         audio.addEventListener('durationchange', fullTimeFunction);
         audio.addEventListener('timeupdate', setTime);
         audio.addEventListener('ended', nextSong);
-        playBtn.disabled = false;
-        backBtn.disabled = false;
-        forwardBtn.disabled = false;
+
+        setTimeout(function () {
+            playBtn.disabled = false;
+            backBtn.disabled = false;
+            forwardBtn.disabled = false;
+        }, 2000);
+
         volumeBtn.disabled = false;
         myCheckbox.disabled = true;
-        playBtn.classList.add('waiting');
+
         setTimeout(function () {
             myCheckbox.disabled = false;
+            playBtn.classList.add('waiting');
         }, 2000);
     } else {
         greetings();
@@ -244,7 +276,7 @@ function greetings() {
     rangeVolume.innerHTML = '';
     volumeBtn.disabled = true;
     volumeBtn.value = '100';
-    playBtn.style.border = '2px solid rgb(34, 34, 34)';
+    playBtn.style.border = '2px solid rgb(137, 0, 0)';
     playBtn.classList.remove('waiting');
     myCheckbox.disabled = true;
     cover.classList.add('start');
@@ -254,10 +286,14 @@ function greetings() {
         backBtn.disabled = true;
         forwardBtn.disabled = true;
         myCheckbox.disabled = false;
+        playBtn.style.border = '2px solid rgb(34, 34, 34)';
+        playBtn.style.color = 'rgb(82, 82, 82)';
+        backBtn.style.color = 'rgb(82, 82, 82)';
+        forwardBtn.style.color = 'rgb(82, 82, 82)';
     }, 2000);
 }
 greetings();
-
+console.dir(playBtn.style)
 console.log(`
 1. Вёрстка +10
     ● вёрстка аудиоплеера: есть кнопка Play/Pause, кнопки "Вперёд" и "Назад" для пролистывания аудиотреков,
