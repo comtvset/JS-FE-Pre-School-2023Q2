@@ -186,19 +186,18 @@ function updateProgress(event) {
     const { duration, currentTime } = event.srcElement;
     const progressPercent = (currentTime / duration) * 100;
     const clampedProgress = Math.min(Math.max(progressPercent, 0), 100);
-    const numberOfDashes = Math.round((clampedProgress / 100) * 8);
-    progress.innerHTML = '-'.repeat(numberOfDashes);
+    const numberOfDashes = Math.round((clampedProgress / 100) * 27);
+    progress.innerHTML = '|'.repeat(numberOfDashes);
 }
 
-// function setProgress(event) {
-//     const width = this.clientWidth
-//     const clickX = event.offsetX
-//     const duration = audio.duration
-//     audio.currentTime = (clickX / width) * duration
-// }
-//   progressContainer.addEventListener('click', setProgress)
+function setProgress(event) {
+    const width = this.clientWidth
+    const clickX = event.offsetX
+    const duration = audio.duration
+    audio.currentTime = (clickX / width) * duration
+}
 
-
+progress.addEventListener('click', setProgress)
 
 myCheckbox.addEventListener('change', function () {
     if (myCheckbox.checked) {

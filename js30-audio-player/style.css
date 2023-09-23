@@ -33,15 +33,15 @@ body {
 
 .player {
     position: relative;
-    width: 805px;
-    height: 670px;
+    width: 765px;
+    height: 600px;
     border-radius: 10px;
     border: 5px solid rgb(36, 36, 36);
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     z-index: 2;
     text-align: center;
-    padding: 15px;
+    padding: 5px;
 }
 
 .audio-system {
@@ -51,16 +51,16 @@ body {
 
 .circle {
     position: absolute;
-    width: 175px;
-    height: 175px;
+    width: 160px;
+    height: 160px;
     background: linear-gradient(49deg, #808080 0%, #303030 50%, #000000 80%);
     border-radius: 95px;
-    left: 538px;
+    left: 493px;
 }
 
 .cover-img {
     position: relative;
-    block-size: 595px;
+    block-size: 555px;
     transform: rotate(44deg);
 }
 
@@ -89,9 +89,9 @@ body {
 
 .tonearm-img {
     position: relative;
-    block-size: 390px;
-    top: 27px;
-    left: -203px;
+    block-size: 380px;
+    top: 20px;
+    left: -202px;
     transform: rotate(331deg);
     transform-origin: 79.5% 14.6%;
 }
@@ -144,14 +144,14 @@ button {
     width: 35px;
     height: 35px;
     color: white;
-    background-color: rgb(48, 48, 48);
+    background-color: rgb(37, 37, 37);
     box-shadow: 0 0px 10px rgb(0, 0, 0);
     transition: 0.5s;
 }
 
 button:hover {
     cursor: pointer;
-    background-color: rgb(37, 37, 37);
+    background-color: rgb(48, 48, 48);
     transition: 0.5s;
 }
 
@@ -208,16 +208,19 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 .progress {
-    /* margin: 0px 10px 0px 10px; */
-    width: 77px;
+    width: 84px;
     text-align: start;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .volume-control {
     position: absolute;
     transform: rotate(270deg);
-    top: 415px;
-    left: 683px;
+    top: 350px;
+    left: 651px;
     width: 140px;
     height: 30px;
     background: linear-gradient(270deg, #4d4d4d 0%, #212121 100%);
@@ -227,8 +230,8 @@ input[type='range']::-webkit-slider-thumb {
 
 .display {
     position: absolute;
-    top: 532px;
-    left: 528px;
+    top: 472px;
+    left: 501px;
     width: 246px;
     height: 110px;
     background-color: rgb(5, 71, 252);
@@ -263,8 +266,8 @@ input[type='range']::-webkit-slider-thumb {
 
 .play-btn {
     position: relative;
-    top: -48px;
-    left: -300px;
+    top: -55px;
+    left: -291px;
     width: 70px;
     height: 70px;
     border: 2px solid rgb(5, 133, 252);
@@ -286,15 +289,15 @@ input[type='range']::-webkit-slider-thumb {
 
 .back-btn {
     position: relative;
-    top: -25px;
-    left: -290px;
+    top: -31px;
+    left: -287px;
     padding-right: 2px;
 }
 
 .forward-btn {
     position: relative;
-    top: -25px;
-    left: -283px;
+    top: -31px;
+    left: -282px;
     padding-left: 2px;
 }
 
@@ -308,7 +311,7 @@ footer {
     color: rgb(179, 179, 179);
     display: flex;
     justify-content: space-between;
-    width: 790px;
+    width: 758px;
     max-width: 100%;
 }
 
@@ -316,7 +319,7 @@ footer {
     width: 80px;
 }
 
-@media (max-height: 768px) {
+@media (max-height: 690px) {
     footer {
         position: absolute;
         margin-top: 0px;
@@ -330,8 +333,8 @@ footer {
 
 .switch {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 15px;
+    left: 15px;
     width: 60px;
     height: 38px;
 }
@@ -354,7 +357,11 @@ footer {
     height: 34px;
     width: 34px;
     left: 0;
-    background-color: white;
+    background: radial-gradient(
+        circle farthest-side at center center,
+        #ffffff 0%,
+        #ababab 80%
+    );
     transition: 0.4s;
 }
 
