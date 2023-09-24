@@ -30,6 +30,7 @@
                     <div class="cover">
                         <img class="cover-img" src="./assets/images/pletter-rs_logo.png" alt="cover">
                     </div>
+                    <canvas id="visualizer" width="120" height="70"></canvas>
                     <img class="tonearm-img" src="./assets/images/tonearm.png" alt="tonearm">
                 </div>
                 <button class="play-btn">PLAY <br> PAUSE</button>
@@ -38,7 +39,7 @@
                 <div class="volume-control"><input class="volume" value="100" type="range" id="volume" min=0 max=100>
                 </div>
 
-                <audio class="audio" src="./assets/audio/Rivière Monk - Voyage.mp3"></audio>
+                <audio class="audio" id="audio" src="./assets/audio/Rivière Monk - Voyage.mp3"></audio>
 
                 <div class="display display-font">
                     <div class="title-song">David Rawlings - Cumberland Gap</div>
@@ -55,7 +56,6 @@
                 <div class="progress-container">
                     <div class="progress"></div>
                 </div>
-
             </div>
         </div>
     </main>
