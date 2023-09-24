@@ -24,6 +24,55 @@ const songs = [
     'David Rawlings - Cumberland Gap',
 ];
 
+let flag = true;
+
+const canvas = document.getElementById('visualizer');
+const ctx = canvas.getContext('2d');
+const audioContext = new window.AudioContext();
+const analyser = audioContext.createAnalyser();
+const source = audioContext.createMediaElementSource(audio);
+
+source.connect(analyser);
+analyser.connect(audioContext.destination);
+
+analyser.fftSize = 128;
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+const barWidth = (canvas.width / bufferLength) * 1.5;
+let barHeight;
+let x = 0;
+
+function draw() {
+    x = 0;
+    analyser.getByteFrequencyData(dataArray);
+
+    if (flag) {
+        ctx.fillStyle = 'rgb(5, 71, 252)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else {
+        ctx.fillStyle = 'rgb(46, 46, 46)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    for (let i = 0; i < bufferLength; i++) {
+        barHeight = dataArray[i] * 0.4;
+
+        if (flag) {
+        ctx.fillStyle = `rgb(220, 220, 220)`;
+    } else {
+        ctx.fillStyle = `rgb(46, 46, 46)`;
+    }
+
+        ctx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight);
+
+        x += barWidth + 2;
+    }
+
+    requestAnimationFrame(draw);
+}
+
+
 setTimeout(function () {
     player.style.opacity = '1';
     welcome.style.opacity = '0';
@@ -88,6 +137,10 @@ function playSong() {
     tonearm.classList.remove('stop');
     playBtn.classList.remove('waiting');
 
+    audioContext.resume().then(() => {
+        draw();
+    });
+
     myCheckbox.disabled = true;
 
     setTimeout(function () {
@@ -107,6 +160,7 @@ function pauseSong() {
     tonearm.classList.remove('play');
     audio.pause();
     playBtn.classList.add('waiting');
+    cancelAnimationFrame(draw);
 }
 
 function nextSong() {
@@ -179,7 +233,6 @@ playBtn.addEventListener('click', () => {
 });
 
 function setTime() {
-    // progress.value = (audio.currentTime / audio.duration) * 100
     let minutes = Math.floor(audio.currentTime / 60);
     if (minutes < 10) {
         minutes = '0' + String(minutes);
@@ -247,6 +300,11 @@ myCheckbox.addEventListener('change', function () {
         volumeBtn.disabled = false;
         myCheckbox.disabled = true;
 
+        flag = true;
+        audioContext.resume().then(() => {
+            draw();
+        });
+
         setTimeout(function () {
             myCheckbox.disabled = false;
             playBtn.classList.add('waiting');
@@ -280,6 +338,10 @@ function greetings() {
     playBtn.classList.remove('waiting');
     myCheckbox.disabled = true;
     cover.classList.add('start');
+    flag = false;
+    audioContext.resume().then(() => {
+        draw();
+    });
 
     setTimeout(function () {
         playBtn.disabled = true;
@@ -293,7 +355,7 @@ function greetings() {
     }, 2000);
 }
 greetings();
-console.dir(playBtn.style)
+
 console.log(`
 1. Вёрстка +10
     ● вёрстка аудиоплеера: есть кнопка Play/Pause, кнопки "Вперёд" и "Назад" для пролистывания аудиотреков,

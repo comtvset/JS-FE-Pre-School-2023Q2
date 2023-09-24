@@ -232,8 +232,8 @@ input[type='range']::-webkit-slider-thumb {
 .volume-control {
     position: absolute;
     transform: rotate(270deg);
-    top: 350px;
-    left: 651px;
+    top: 240px;
+    left: 646px;
     width: 140px;
     height: 30px;
     background: linear-gradient(270deg, #4d4d4d 0%, #212121 100%);
@@ -251,7 +251,6 @@ input[type='range']::-webkit-slider-thumb {
     border-radius: 5px;
     border: 8px solid rgb(36, 36, 36);
     padding: 0px 2px 0px 2px;
-    transition: 0.1s;
 }
 
 .display-font {
@@ -404,4 +403,24 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+
+.audio-visualizer {
+    width: 100%;
+    height: 10px;
+    background-color: #ccc;
+    margin-top: 20px;
+    transition: height 0.1s, background-color 0.1s;
+}
+
+#visualizer {
+    position: absolute;
+    top: 379px;
+    left: 610px;
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(46, 46, 46);
+    border: 8px solid rgb(36, 36, 36);
+    border-radius: 5px;
 }
