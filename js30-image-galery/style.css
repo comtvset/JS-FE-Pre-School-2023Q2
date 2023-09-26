@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+    color: rgb(179, 179, 179);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.top-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.fonts-for-footer {
+    margin: 0 auto;
+    color: rgb(128, 128, 128);
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.logo {
+    width: 80px;
+}
