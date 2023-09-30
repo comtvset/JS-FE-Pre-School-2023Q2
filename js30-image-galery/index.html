@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href=".//assets/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display&display=swap" rel="stylesheet">
     <title>image-galery</title>
 </head>
 
@@ -21,8 +24,15 @@
                     <option value="flickr">flickr</option>
                 </select>
             </div>
-            <div class="choice-themes">choice-themes</div>
-            <div class="search">search</div>
+            <form id="form">
+                <input type="search" id="search" class="search" autofocus autocomplete="off" placeholder="Search">
+            </form>
+            <div class="choice-themes">
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle" value="off" onchange="themeToggle()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
         </div>
         <div class="main-container"></div>
     </main>
