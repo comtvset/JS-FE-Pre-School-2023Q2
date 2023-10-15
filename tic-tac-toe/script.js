@@ -2,8 +2,10 @@ const timer = document.querySelector('.timer');
 let cell = document.querySelectorAll('.cell');
 const field = document.querySelector('.field-of-game');
 const modalButton = document.getElementById('modal-button');
+const resultButton = document.getElementById('result-button');
 const windowInfo = document.querySelector('.window-info');
 const info = document.querySelector('.info');
+const topResult = document.getElementById('top-result');
 
 modalButton.addEventListener('click', function () {
     windowInfo.style.display = 'none';
@@ -19,6 +21,7 @@ field.addEventListener('click', function () {
     if (!start) {
         intervalTimer = setInterval(runTimer, 1000);
         start = true;
+        resultButton.setAttribute('disabled', 'disabled')
     }
 });
 
@@ -115,14 +118,13 @@ function check(arr, name) {
         }
     }
 
-    if(arrX.length >= 5 || arrO.length >= 5) {
+    if (arrX.length >= 5 || arrO.length >= 5) {
         gameEnd();
         textInfo = 'Draw in the game';
         setInfo(textInfo);
         cell.map((item) => {
             item.classList.add('draw');
         });
-
     }
 }
 
@@ -134,9 +136,9 @@ function victory(name, allSteps, time, guess) {
     seconds = seconds < 10 ? '0' + seconds : seconds;
     showTime = `0${minutes}:${seconds}`;
 
-    gameEnd()
+    gameEnd();
     textInfo = `Won '${name}' in ${allSteps} moves. Game time: ${showTime}`;
-    setInfo(textInfo)
+    setInfo(textInfo);
 
     for (let i = 0; i < cell.length; i++) {
         for (let j = 0; j < guess.length; j++) {
@@ -144,22 +146,25 @@ function victory(name, allSteps, time, guess) {
                 cell[i].classList.add('win');
             }
         }
-    };
+    }
+
+    saveLocalStorage(name, showTime, allSteps);
 }
 
 function setInfo(textInfo) {
     modalButton.innerHTML = 'Try again';
+    topResult.style.display = 'none';
 
     modalButton.addEventListener('click', function () {
-        windowInfo.style.display = 'none'
+        windowInfo.style.display = 'none';
         reset();
     });
 
     info.innerHTML = textInfo;
 
-    setTimeout(function(){
+    setTimeout(function () {
         windowInfo.style.display = 'flex';
-    }, 2000)
+    }, 2000);
 }
 
 function reset() {
@@ -178,18 +183,82 @@ function reset() {
     timer.innerHTML = `01:00`;
     time = 59;
     start = false;
+    resultButton.removeAttribute('disabled');
 }
 
+function saveLocalStorage(name, showTime, allSteps) {
+    const games = JSON.parse(localStorage.getItem('games')) || [];
+    const game = {
+        won: name,
+        time: showTime,
+        moves: allSteps,
+    };
+    games.push(game);
+    localStorage.setItem('games', JSON.stringify(games));
+}
 
-// console.log(`
-// 1. Вёрстка +10
-//     ● реализован интерфейс игры +5 ✅
-//     ● в футере приложения есть ссылка на гитхаб автора приложения, год создания приложения, логотип курса со ссылкой на курс +5 ✅
-// 2. При кликах по игровому полю по очереди отображаются крестики и нолики. Первая фигура всегда крестик +10 ✅
-// 3. Игра завершается, когда три фигуры выстроились в ряд по вертикали, горизонтали или диагонали +10 ✅
-// 4. По окончанию игры выводится её результат - выигравшая фигура и количество ходов от начала игры до её завершения +10 ✅
-// 5. Результаты последних 10 игр сохраняются в local storage. Есть таблица рекордов, в которой отображаются результаты предыдущих 10 игр +10 ❌
-// 6. Анимации или звуки, или настройки игры. Баллы начисляются за любой из перечисленных пунктов +10 ✅
-// 7. Очень высокое качество оформления приложения и/или дополнительный не предусмотренный в задании функционал, улучшающий качество приложения +10 ❌
-//     ● высокое качество оформления приложения предполагает собственное оригинальное оформление равное или отличающееся в лучшую сторону по сравнению с демо
-// `)
+resultButton.addEventListener('click', function () {
+    windowInfo.style.display = 'flex';
+    topResult.style.display = 'block';
+    modalButton.innerHTML = 'Close';
+    info.innerHTML = 'Top results:';
+
+    const spanResult = document.querySelectorAll('.text');
+    spanResult.forEach(item => {
+        item.remove();
+    });
+
+    const games = JSON.parse(localStorage.getItem('games')) || [];
+
+    function compareByTime(a, b) {
+        const timeA = a.time;
+        const timeB = b.time;
+
+        if (timeA < timeB) {
+            return -1;
+        }
+        if (timeA > timeB) {
+            return 1;
+        }
+        return 0;
+    }
+
+    games.sort(compareByTime)
+
+    let arr = [];
+    let place = 1;
+
+    for (let i = 0; i < games.length; i++) {
+        const winner = games[i].won;
+        const time = games[i].time;
+        const moves = games[i].moves;
+
+        arr.push(`${place}. Winner: ${winner}, Time: ${time}, Moves: ${moves}`);
+        place++
+    }
+
+    for (let i = 0; i < 10; i++) {
+        const span = document.createElement('span');
+        topResult.appendChild(span);
+        span.classList.add('text');
+        if(arr[i] !== undefined) {
+            span.innerHTML = arr[i];
+        } else {
+            span.innerHTML = '';
+        }
+    }
+
+});
+
+console.log(`
+1. Вёрстка +10
+    ● реализован интерфейс игры +5 ✅
+    ● в футере приложения есть ссылка на гитхаб автора приложения, год создания приложения, логотип курса со ссылкой на курс +5 ✅
+2. При кликах по игровому полю по очереди отображаются крестики и нолики. Первая фигура всегда крестик +10 ✅
+3. Игра завершается, когда три фигуры выстроились в ряд по вертикали, горизонтали или диагонали +10 ✅
+4. По окончанию игры выводится её результат - выигравшая фигура и количество ходов от начала игры до её завершения +10 ✅
+5. Результаты последних 10 игр сохраняются в local storage. Есть таблица рекордов, в которой отображаются результаты предыдущих 10 игр +10 ✅
+6. Анимации или звуки, или настройки игры. Баллы начисляются за любой из перечисленных пунктов +10 ✅
+7. Очень высокое качество оформления приложения и/или дополнительный не предусмотренный в задании функционал, улучшающий качество приложения +10 ❌
+    ● высокое качество оформления приложения предполагает собственное оригинальное оформление равное или отличающееся в лучшую сторону по сравнению с демо
+`)

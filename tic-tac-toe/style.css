@@ -119,6 +119,13 @@ svg text {
     min-height: 10vw;
 }
 
+.text {
+    display: flex;
+    color: rgb(248, 248, 248);
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 100;
+}
+
 .disable {
     pointer-events: none;
 }
