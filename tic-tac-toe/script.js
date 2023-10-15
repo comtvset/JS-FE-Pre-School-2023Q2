@@ -6,6 +6,13 @@ const resultButton = document.getElementById('result-button');
 const windowInfo = document.querySelector('.window-info');
 const info = document.querySelector('.info');
 const topResult = document.getElementById('top-result');
+const theme = document.getElementById('theme');
+const sound = document.getElementById('sound');
+const html = document.documentElement;
+
+const click = document.createElement('audio');
+click.src = './assets/sound/click.mp3';
+let off = false;
 
 modalButton.addEventListener('click', function () {
     windowInfo.style.display = 'none';
@@ -21,7 +28,7 @@ field.addEventListener('click', function () {
     if (!start) {
         intervalTimer = setInterval(runTimer, 1000);
         start = true;
-        resultButton.setAttribute('disabled', 'disabled')
+        resultButton.setAttribute('disabled', 'disabled');
     }
 });
 
@@ -68,12 +75,24 @@ cell.map((item, index) =>
                 arrX.push(index);
                 step++;
                 allSteps++;
+
+                if (off === true) {
+                    click.play();
+                } else {
+                    click.pause();
+                }
             } else {
                 item.innerHTML = 'o';
                 item.classList.add('disable');
                 arrO.push(index);
                 step--;
                 allSteps++;
+
+                if (off === true) {
+                    click.play();
+                } else {
+                    click.pause();
+                }
             }
         }
 
@@ -204,7 +223,7 @@ resultButton.addEventListener('click', function () {
     info.innerHTML = 'Top results:';
 
     const spanResult = document.querySelectorAll('.text');
-    spanResult.forEach(item => {
+    spanResult.forEach((item) => {
         item.remove();
     });
 
@@ -223,7 +242,7 @@ resultButton.addEventListener('click', function () {
         return 0;
     }
 
-    games.sort(compareByTime)
+    games.sort(compareByTime);
 
     let arr = [];
     let place = 1;
@@ -234,20 +253,60 @@ resultButton.addEventListener('click', function () {
         const moves = games[i].moves;
 
         arr.push(`${place}. Winner: ${winner}, Time: ${time}, Moves: ${moves}`);
-        place++
+        place++;
     }
 
     for (let i = 0; i < 10; i++) {
         const span = document.createElement('span');
         topResult.appendChild(span);
         span.classList.add('text');
-        if(arr[i] !== undefined) {
+        if (arr[i] !== undefined) {
             span.innerHTML = arr[i];
         } else {
             span.innerHTML = '';
         }
     }
+});
 
+let dark = true;
+
+function themes() {
+    if (dark) {
+        html.style.backgroundColor = 'rgb(228, 228, 228)';
+        cell.forEach((item) => {
+            item.style.backgroundColor = 'rgb(228, 228, 228)';
+        });
+        windowInfo.style.backgroundColor = 'rgba(214, 214, 214, 0.911)';
+        info.style.color = 'rgb(24, 24, 24)';
+        theme.innerHTML = 'Dark';
+
+        dark = false;
+    } else {
+        html.style.backgroundColor = 'rgb(43, 43, 43)';
+        cell.forEach((item) => {
+            item.style.backgroundColor = 'rgb(43, 43, 43)';
+        });
+        windowInfo.style.backgroundColor = 'rgba(31, 31, 31, 0.911)';
+        info.style.color = 'rgb(201, 201, 201)';
+        theme.innerHTML = 'Light';
+
+        dark = true;
+    }
+}
+
+theme.addEventListener('click', function () {
+    themes();
+});
+
+sound.addEventListener('click', function () {
+    if (off === false) {
+        sound.style.color = 'rgb(220 142 13)';
+        off = true;
+    } else {
+        click.preload = 'none';
+        sound.style.color = 'black';
+        off = false;
+    }
 });
 
 console.log(`
@@ -259,6 +318,6 @@ console.log(`
 4. По окончанию игры выводится её результат - выигравшая фигура и количество ходов от начала игры до её завершения +10 ✅
 5. Результаты последних 10 игр сохраняются в local storage. Есть таблица рекордов, в которой отображаются результаты предыдущих 10 игр +10 ✅
 6. Анимации или звуки, или настройки игры. Баллы начисляются за любой из перечисленных пунктов +10 ✅
-7. Очень высокое качество оформления приложения и/или дополнительный не предусмотренный в задании функционал, улучшающий качество приложения +10 ❌
+7. Очень высокое качество оформления приложения и/или дополнительный не предусмотренный в задании функционал, улучшающий качество приложения +10 ✅
     ● высокое качество оформления приложения предполагает собственное оригинальное оформление равное или отличающееся в лучшую сторону по сравнению с демо
-`)
+`);
