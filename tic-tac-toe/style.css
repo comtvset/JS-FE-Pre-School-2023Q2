@@ -1,0 +1,244 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    font-weight: normal;
+}
+
+html {
+    background-color: rgb(43, 43, 43);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(151, 54, 54);
+}
+a:visited {
+    color: rgb(179, 179, 179);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    align-items: center;
+}
+
+.titel {
+    margin: 0 auto;
+}
+
+svg {
+    font-family: 'Raleway', sans-serif;
+    width: 100%;
+    height: 100%;
+}
+svg text {
+    animation: stroke 5s infinite alternate;
+    stroke-width: 2;
+    stroke: #365fa0;
+    font-size: 55px;
+    font-weight: 800;
+}
+@keyframes stroke {
+    0% {
+        fill: rgba(72, 138, 204, 0);
+        stroke: rgba(54, 95, 160, 1);
+        stroke-dashoffset: 25%;
+        stroke-dasharray: 0 50%;
+        stroke-width: 2;
+    }
+    70% {
+        fill: rgba(72, 138, 204, 0);
+        stroke: rgba(54, 95, 160, 1);
+    }
+    80% {
+        fill: rgba(72, 138, 204, 0);
+        stroke: rgba(54, 95, 160, 1);
+        stroke-width: 3;
+    }
+    100% {
+        fill: rgba(72, 138, 204, 1);
+        stroke: rgba(54, 95, 160, 0);
+        stroke-dashoffset: -25%;
+        stroke-dasharray: 50% 0;
+        stroke-width: 0;
+    }
+}
+
+.timer {
+    margin: 0 auto;
+    margin-bottom: 30px;
+    color: rgb(163, 57, 57);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+}
+
+.flash {
+    animation-name: flash;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes flash {
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
+
+.field-of-game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    width: 30vw;
+    height: 30vw;
+    margin: 0 auto;
+    background-color: rgb(4, 81, 126);
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 8vw;
+    cursor: pointer;
+    background-color: rgb(43, 43, 43);
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 100;
+    color: rgba(170, 125, 40, 0.637);
+    min-height: 10vw;
+}
+
+.text {
+    display: flex;
+    color: rgb(248, 248, 248);
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 100;
+}
+
+.disable {
+    pointer-events: none;
+}
+
+.win {
+    animation-name: text-shadow-multicolor;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes text-shadow-multicolor {
+    0% {
+        text-shadow: 0 0px 15px rgba(29, 29, 29, 0.712);
+    }
+    50% {
+        text-shadow: 0 0px 10px rgba(255, 2, 2, 0.781);
+    }
+    100% {
+        text-shadow: 0 0px 10px rgb(0, 0, 0);
+    }
+}
+
+.draw {
+    animation-name: draw;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes draw {
+    0% {
+        text-shadow: 0 0px 15px rgba(29, 29, 29, 0.712);
+    }
+    50% {
+        text-shadow: 0 0px 10px rgba(255, 209, 2, 0.781);
+    }
+    100% {
+        text-shadow: 0 0px 10px rgb(0, 0, 0);
+    }
+}
+
+button {
+    max-width: 300px;
+    margin: 75px;
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid rgba(28, 158, 218, 0.308);
+    background-color: rgba(28, 158, 218, 0.308);
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Raleway', sans-serif;
+}
+
+button:active {
+    background-color: rgba(28, 158, 218, 0.137);
+}
+
+.footer {
+    margin: 0 auto;
+    color: rgb(128, 128, 128);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 20px 0 20px;
+    align-items: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+}
+
+.logo {
+    width: 80px;
+}
+
+.window-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    height: 850px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(31, 31, 31, 0.911);
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.info {
+    color: rgb(201, 201, 201);
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 100;
+    font-size: 25px;
+    text-align: center;
+    padding: 5px;
+}
+
+@media (max-width: 1000px) {
+    .field-of-game {
+        width: 90vw;
+        height: 90vw;
+    }
+
+    .cell {
+        font-size: 20vw;
+        min-height: 25vw;
+    }
+
+    .window-info {
+        width: 100%;
+        height: 100%;
+    }
+}
