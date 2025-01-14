@@ -303,7 +303,7 @@ input[type='range']::-webkit-slider-thumb {
 
 .back-btn {
     position: relative;
-    top: -31px;
+    top: -41px;
     left: -287px;
     padding-right: 2px;
     font-family: 'Noto Sans JP', sans-serif;
@@ -313,7 +313,7 @@ input[type='range']::-webkit-slider-thumb {
 
 .forward-btn {
     position: relative;
-    top: -31px;
+    top: -41px;
     left: -282px;
     padding-left: 2px;
     font-family: 'Noto Sans JP', sans-serif;
